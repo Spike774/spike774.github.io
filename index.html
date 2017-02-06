@@ -153,11 +153,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                9
+                10
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                13
+                15
                 <span>标签</span>
             </div>
         </div>
@@ -200,6 +200,167 @@
 
             
             <section id="main">
+    <article id="post-practice-of-raspberry-pi-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/06/practice-of-raspberry-pi-2/">practice of raspberry pi 2</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/06/practice-of-raspberry-pi-2/">
+            <time datetime="2017-02-06T14:34:48.000Z" itemprop="datePublished">2017-02-06</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/coding/">coding</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/debian/">debian</a>, <a class="tag-link" href="/tags/raspberry-pi/">raspberry pi</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h3><hr>
+<p>2014年还在深圳的时候想尝试一下智能家居相关的业务和具体的玩法，入了raspberry pi2的板卡、亚克力外壳、2A的适配器和一个腾达的无线网卡。</p>
+<p>rp2使用低功耗的arm处理器，装载debian系统，主板采用最简化配置和有限的接口，整个面积只有公交卡大小。用hdmi线连接显示器，接好键盘，插入存着<br>预安装程序的sd卡即可开始安装。设置为固定ip之后就可以使用ssh或者vnc远程登录。</p>
+<p>raspberry pi有强大的GPIO接口，方便连接其他控制元件，例如电气控制中最常用的继电保护装置。<br>当时主要跟随以下三本书的内容推进。</p>
+<p><a href="https://www.amazon.cn/gp/product/B00EPF790U/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1" target="_blank" rel="external">爱上Raspberry Pi</a></p>
+<p><a href="https://www.amazon.cn/gp/product/B00KLAQ954/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1" target="_blank" rel="external">Linux+树莓派玩转智能家居(第2版)</a></p>
+<p><a href="https://www.amazon.cn/gp/product/B00HTXKSL2/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1" target="_blank" rel="external">Raspberry Pi:Python编程入门</a></p>
+<p>也间接增加了搬家时候的负担和痛苦。</p>
+<p>言归正传，也是从rp2开始接触Linux系统，顺便在14年在edx跟完了两门很重要的课程: Introduction to Computing with java, Indroduction to Linux.<br>也趁此机会复习了一下模拟电路里的知识和电子器件。</p>
+<p>借着在深圳的地利也买了块面包板和一堆杜邦线，传感器件。最后半途而废，搬家的时候还随身带着这些东西，警示着自己的怠惰。</p>
+<p>少了一份填坑的坚持。不知道是不是因为随着年龄的增长越要想在行动前看到利益，更加世俗了。</p>
+<p>回溯起来，从15年1月开始之后的第7周，知道了办公室即将于4月底解散。忙于下一份旅途的不确定性，耽误了下来。最终绕了一圈，又回到了上海。</p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><hr>
+<p>基于debian, 并且很方便利用python程序调用GPIO接口，但是最后没有试验成功。<br>所以这块暂时就没有代码可以展示。</p>
+<h3 id="trouble-shooting"><a href="#trouble-shooting" class="headerlink" title="trouble shooting"></a>trouble shooting</h3><hr>
+<p>再次摘录一些归档的笔记和荒废在csdn blog里的一些东西。</p>
+<p><br></p>
+<h5 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h5><p>端子25电压为3.3V, 和arduino的电压不同，不能混用，切记。</p>
+<p><a href="https://pypi.python.org/pypi/RPi.GPIO" target="_blank" rel="external">GPIO python pkg</a>可以找到相关脚本python支持包。</p>
+<p><br></p>
+<h5 id="Raspberry-pi-2-适配器型号"><a href="#Raspberry-pi-2-适配器型号" class="headerlink" title="Raspberry pi 2 适配器型号"></a>Raspberry pi 2 适配器型号</h5><p>为了稳定运行，请使用5V 2A适配器。</p>
+<p><br></p>
+<h5 id="公网IP和远程登入"><a href="#公网IP和远程登入" class="headerlink" title="公网IP和远程登入"></a>公网IP和远程登入</h5><p>当时想通过微信远程遥控，因此遇到了公网IP的问题。电信用户一般都是有公网IP的，但是不是固定IP, 每隔一段时间会有变动。<br>使用花生壳可以进行内网穿透，但是当时没有找到完美的解决方案，在debian系统内安装成功，但是没有调试成功。</p>
+<p>电信一般是封锁80端口，因此需要通过其他途径绕开。一般使用vps部署NGINX反向代理解决。</p>
+<p>Yeelink也提供一些内网穿透的解决方案，但是个人最终没有调试成功。</p>
+<p>当时也希望用pi架设一个blog, 由于公网IP的问题最终也作罢。不过2年之后在github上实现了久远的愿望，也不错。</p>
+<p><br></p>
+<h5 id="LCD1602"><a href="#LCD1602" class="headerlink" title="LCD1602"></a>LCD1602</h5><p>参考接线完成后成功点亮LCD，由于没有电位器所以不能调节LCD亮度。</p>
+<p>连接液晶屏：<br>LCD1602液晶屏提供了16列x2行的ASCII字符显示能力，工作电压5V，<br>提供4位数据与8位数据两种工作模式，Raspberry Pi的GPIO口数量很有限，所以我们使用4位数据模式。</p>
+<p>LCD1602液晶屏模块提供了16个引脚，我们只需接其中的12个即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">1. VSS，接地，RPi PIN 6</div><div class="line">2. VDD，接5V电源，PRi PIN 2</div><div class="line">3. VO，液晶对比度调节，接电位器中间的引脚</div><div class="line">4. RS，寄存器选择，接GPIO 14，RPi PIN 8</div><div class="line">5. RW，读写选择，接地，表示写模式，PRi PIN 6</div><div class="line">6. EN，使能信号，接GPIO 15，RPi PIN 10</div><div class="line">7. D0，数据位0，4位工作模式下不用，不接</div><div class="line">8. D1，数据位1，4位工作模式下不用，不接</div><div class="line">9. D2，数据位2，4位工作模式下不用，不接</div><div class="line">10. D3，数据位3，4位工作模式下不用，不接</div><div class="line">11. D4，数据位4，接GPIO 17，RPi PIN 11</div><div class="line">12. D5，数据位5，接GPIO 18，RPi PIN 12</div><div class="line">13. D6，数据位6，接GPIO 27，RPi PIN 13</div><div class="line">14. D7，数据位7，接GPIO 22，RPi PIN 15</div><div class="line">15. A，液晶屏背光+，接5V，RPi PIN 2</div><div class="line">16. K，液晶屏背光-，接地，RPi PIN 6</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/" data-id="ciyu78z21000o1fsq97vmubx7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -279,7 +440,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/04/best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api/" data-id="ciyr873pn000rklsqmq08nzg1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/04/best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api/" data-id="ciyu78z0w00071fsqdw6a7wef" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -447,7 +608,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/" data-id="ciyr873pm000qklsq8m4555mq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/" data-id="ciyu78z0m00041fsqfshikhyt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -597,7 +758,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/FSENdzwxy/" data-id="ciyr873pk000nklsqxcuag8g1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/FSENdzwxy/" data-id="ciyu78z2q001q1fsqawew1we3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -761,7 +922,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/jan24collision/" data-id="ciyr873pu000wklsqw71hg2so" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/jan24collision/" data-id="ciyu78z1200081fsqaey40p95" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -902,7 +1063,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/" data-id="ciyr873q80015klsqv0vadzkb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/" data-id="ciyu78z24000t1fsqo1gyikpe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1049,7 +1210,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="ciyr873pr000sklsqr6gmib27" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="ciyu78z1d00091fsq1smwpsl1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1213,7 +1374,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="ciyr873pf000lklsqqhltfz2j" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="ciyu78z0900021fsq5351zd7z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1344,7 +1505,7 @@
 <li><del>archive the tips and ajax post problem during web development with flask</del></li>
 <li><del>archive best practice of gis coding in web front with Amap api, trouble shooting</del></li>
 <li><del>learn vuejs to deploy a h5 mobile app with 2 main functions: roof around me, solar tool kit to generate reports</del></li>
-<li>archive some resp pi 2  related practice, linux learning tips</li>
+<li><del>archive some rasp pi 2  related practice, linux learning tips</del></li>
 <li>computer vision practice by opencv</li>
 <li>PV meteo and system design tips</li>
 </ul>
@@ -1366,7 +1527,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="ciyr873pw000yklsqo3v9oqas" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="ciyu78z1f000c1fsq7coq9g7g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1495,7 +1656,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="ciyr873q20012klsqo5ejoqjl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="ciyu78z1j000e1fsq0vbp2ly9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1585,6 +1746,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/02/06/practice-of-raspberry-pi-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://1.bp.blogspot.com/-ri6tbJi1W_I/Vt_iefsijgI/AAAAAAAABnA/1U-9VGRZYXI/s1600/raspberry-pi-b.jpg)" alt="practice of raspberry pi 2" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/coding/">coding</a></p>
+                            <p class="item-title"><a href="/2017/02/06/practice-of-raspberry-pi-2/" class="title">practice of raspberry pi 2</a></p>
+                            <p class="item-date"><time datetime="2017-02-06T14:34:48.000Z" itemprop="datePublished">2017-02-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/02/04/best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api/" class="thumbnail">
     
     
@@ -1658,25 +1838,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/01/30/single-page-tool-kit-by-vue/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/coding/">coding</a></p>
-                            <p class="item-title"><a href="/2017/01/30/single-page-tool-kit-by-vue/" class="title">single page tool kit by vue</a></p>
-                            <p class="item-date"><time datetime="2017-01-29T17:24:14.000Z" itemprop="datePublished">2017-01-30</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1686,7 +1847,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">2</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -1695,7 +1856,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
         </div>
     </div>
 
@@ -1704,7 +1865,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1713,7 +1874,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 10px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 20px;">WSL</a> <a href="/tags/amap-api/" style="font-size: 10px;">amap api</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 20px;">flask</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
+            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 10px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 20px;">WSL</a> <a href="/tags/amap-api/" style="font-size: 10px;">amap api</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 20px;">flask</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
         </div>
     </div>
 
