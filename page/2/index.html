@@ -153,11 +153,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                14
+                18
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                19
+                23
                 <span>标签</span>
             </div>
         </div>
@@ -200,6 +200,629 @@
 
             
             <section id="main">
+    <article id="post-best-practice-of-flask-dev-during-Dec-16" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/04/best-practice-of-flask-dev-during-Dec-16/">best pracetice of flask development</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/04/best-practice-of-flask-dev-during-Dec-16/">
+            <time datetime="2017-02-04T04:59:43.000Z" itemprop="datePublished">2017-02-04</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/coding/">coding</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/NGINX/">NGINX</a>, <a class="tag-link" href="/tags/WSL/">WSL</a>, <a class="tag-link" href="/tags/flask/">flask</a>, <a class="tag-link" href="/tags/gunicorn/">gunicorn</a>, <a class="tag-link" href="/tags/python/">python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h3><hr>
+<p>填坑，记录分享在2016年12月使用flask进行web开发遇到的一些问题。</p>
+<p>本人只有入门级的python经验，之前只写过一些爬api数据的工具，<br>入门级Linux经验 —— MOOC edx和Rasp pi 2进行少量实践，<br>入门级Java coding经验 —— MOOC edx，<br>入门级Javascript经验 —— codeacadamy, w3cschool，<br>入门级Machine learning经验 —— MOOC coursera by Octave，<br>未做过web开发相关的事。</p>
+<p>本次事件的背景是要上线一个可以识别屋顶的web应用，<br>使用场景主要在新能源行业，具体作用是辅助分布式光伏项目开发。<br>本次web开发主要基于<a href="https://www.amazon.cn/dp/B00QT2TQCG/ref=sr_1_1?ie=UTF8&amp;qid=1485099275&amp;sr=8-1&amp;keywords=web+development+with+flask" target="_blank" rel="external">web development of flask</a><br>这本书。</p>
+<p>局限于个人经历，经过简单咨询，起步时决定使用flask作为后端，也方便对接现有的机器学习包。<br>由于有传参的需求，因此前端使用AngularJS进行相关数据绑定和传输。<br>GIS api原计划使用Google map api, 但是由于资金没有到位，暂时无法获取可靠的服务器资源，改用国内使用环境较友善的AMAP(高德地图) api.<br>初步的项目是在线执行识别程序脚本(python脚本),<br>但是在项目实际过程中发现脚本的运算时间过长(dell xps13 9350, ubuntu 16 LTS 平均识别时间约20s)，<br>因此决定把识别和渲染分离。识别结果单独进sqlite数据库，web app只进行查询，缩短页面响应时间，改善用户体验。</p>
+<p>PS: 后改用aws ec2 t2.micro服务器处理图像识别任务，效率大大提升，每小时可处理大约100 km2区域，涵盖3000+ poi.</p>
+<p>开发环境为WSL - windows subsystem linux, dst. Ubuntu 14 LTS<br>只有一台电脑，之前是把Ubuntu装在另一个外置固态硬盘里，启动不太方便，<br>而且Ubuntu的中文输入法调制，shadowsocks配置均以失败告终，为了更顺畅地用<br>google和stack overflow折中于此。</p>
+<p>现阶段发现WSL唯二的不好用的地方是：</p>
+<ol>
+<li>python virtualenv部署不成功，可以venv active但是实际lib路径仍为系统路径</li>
+<li>网络层没有开发完全，ifconfig及相关usr/network/interface等设置暂时均无法实现。<br><a href="https://github.com/Microsoft/BashOnWindows/issues/468" target="_blank" rel="external">WSL currently does not support NETLINK sockets</a></li>
+</ol>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><hr>
+<p>文件目录，典型的flask文件配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">frontiersolar/</div><div class="line">├── app</div><div class="line">├── migrations</div><div class="line">├── requirements</div><div class="line">├── tempfiles</div><div class="line">├── tests</div><div class="line">└── venv</div></pre></td></tr></table></figure></p>
+<p>基于上文中提到的教程，<br>其中主要变更的内容在app/models.py, app/main/views.py和app/templates/newpages.html</p>
+<p>在数据库中新增了一个表，并注入数据。<br>如果不习惯命令行操作，推荐使用<a href="https://sqlitestudio.pl/" target="_blank" rel="external">SQLiteStudio</a>, 其GUI操作界面非常友善好用。</p>
+<p>在views.py和templates中新增了两个html页面以增补额外的功能。</p>
+<p>views.py的部分代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@main.route('/NEWPAGE1/&lt;username&gt;', methods=['GET', 'POST'])</span></div><div class="line"><span class="meta">@login_required</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">eagleeye</span><span class="params">(username)</span>:</span></div><div class="line">    user = User.query.filter_by(username=username).first_or_404()    </div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">'NEWPAGE1.html'</span>, user=user)</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@main.route('/NEWPAGE2/&lt;username&gt;', methods=['POST', 'GET'])</span></div><div class="line"><span class="meta">@login_required</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">roofresult</span><span class="params">(username)</span>:</span></div><div class="line">    user = User.query.filter_by(username=username).first_or_404()</div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</div><div class="line">        <span class="keyword">global</span> coords, clist, coord_list, center_coord</div><div class="line">        coords = request.get_json(force=<span class="keyword">True</span>)</div><div class="line">        clist = [coords[<span class="string">'minLat'</span>], coords[<span class="string">'minLng'</span>], coords[<span class="string">'maxLat'</span>], coords[<span class="string">'maxLng'</span>], coords[<span class="string">'cLng'</span>], coords[<span class="string">'cLat'</span>]]</div><div class="line">        coord_list = Roof.query.filter(Roof.lat.between(clist[<span class="number">0</span>], clist[<span class="number">2</span>]), Roof.lon.between(clist[<span class="number">1</span>], clist[<span class="number">3</span>])).order_by(</div><div class="line">            <span class="string">"area desc"</span>).all()</div><div class="line">        <span class="keyword">for</span> roof <span class="keyword">in</span> coord_list:</div><div class="line">            db.session.expunge(roof)        </div><div class="line">        center_coord = [clist[<span class="number">4</span>], clist[<span class="number">5</span>]]        </div><div class="line">    <span class="keyword">return</span> render_template(<span class="string">'NEWPAGE2.html'</span>, coord_list=coord_list, user=user, center_coord=center_coord)</div></pre></td></tr></table></figure></p>
+<p>NEWPAGE.html中的部分代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">AMap.event.addDomListener(<span class="built_in">document</span>.getElementById(<span class="string">'eargleEye'</span>), <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> drawRectangle = mouseTool.rectangle(); <span class="comment">//用鼠标工具画矩形</span></div><div class="line">        AMap.event.addListener( mouseTool,<span class="string">'draw'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123; <span class="comment">//添加事件</span></div><div class="line">        <span class="keyword">var</span> rect = e.obj;</div><div class="line">        <span class="keyword">var</span> data = &#123;<span class="string">"minLng"</span> : rect.getBounds().getSouthWest( ).getLng(),</div><div class="line">                    <span class="string">"maxLng"</span> : rect.getBounds().getNorthEast( ).getLng(),</div><div class="line">                    <span class="string">"minLat"</span> : rect.getBounds().getSouthWest( ).getLat(),</div><div class="line">                    <span class="string">"maxLat"</span> : rect.getBounds().getNorthEast( ).getLat(),</div><div class="line">                    <span class="string">"cLng"</span> : rect.getBounds().getCenter( ).getLng(),</div><div class="line">                    <span class="string">"cLat"</span> : rect.getBounds().getCenter( ).getLat()</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">if</span>(confirm(<span class="string">"are you sure to submit?"</span>))</div><div class="line">                &#123;</div><div class="line">                        $.post(&#123;</div><div class="line">                            <span class="attr">url</span> : <span class="string">"&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;"</span>,</div><div class="line">                            <span class="attr">data</span>: <span class="built_in">JSON</span>.stringify(data),</div><div class="line">                            <span class="attr">contentType</span>: <span class="string">'application/json;charset=UTF-8'</span>,</div><div class="line">                            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">                              top.location.href = <span class="string">"&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;"</span>;                              </div><div class="line">                            &#125;,</div><div class="line">                            <span class="attr">async</span>:<span class="literal">false</span></div><div class="line">                        &#125;);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                         mouseTool.close(<span class="literal">true</span>);</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>其中第二个页面为了达成传参的目的，使用了全局变量。</li>
+<li>个人使用中感受到的flask的局限，除了form等常规的前后端传参方法外，使用POST方法<br>传递json或者xml data相对复杂。</li>
+<li>前端由于使用jinja2模板，html文件中除了静态模板文件还包含了大量的js代码，<br>个人理解这样把视图和功能混放，不便于后期维护，其二也把功能部分的数据放在了前端，<br>可以轻易获取，保密性较差。</li>
+</ul>
+<h3 id="trouble-shooting"><a href="#trouble-shooting" class="headerlink" title="trouble shooting"></a>trouble shooting</h3><hr>
+<h5 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h5><p>在NEWPAGE1.html中使用ajax的POST方法传参给后端的NEWPAGE2,<br>NEWPAGE2后端处理完这些参数后把从数据库查询的object返回到NEWPAGE2.html渲染。</p>
+<p>初始处理的时候发现NEWPAGE2后端程序会先响应一次POST方法接收数据，再响应一次GET方法发送渲染数据。<br>且只有在POST方法时才能获取前端传入数据。</p>
+<p>POST方法获取json数据并存储计算，GET方法时只要进行到解析json数据的指令就会立即报错终止。<br>因此必须要写if表达式并且return语句要在if外侧，否则无法完成前端模板渲染。</p>
+<p>之前也尝试过把需要传递的参数放入url中传递，天然形成api,但是实际操作过程中需要传递的<br>参数过多，远超url长度限制，后放弃。</p>
+<p>考虑到数据读取的便利性还是希望传入obj进行操作，因此最后选择全局变量的方法处理。<br>由于现在处于demo阶段，无论是数据库的数据量还是网站访问的人员都不多，<br>该方法的问题还没有充分暴露，稳定性暂时无法判断。</p>
+<h5 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h5><p>在测试阶段一般直接使用manage.py对flask app进行管理、运行操作，但是在生产环境中不建议<br>直接使用flask的内置http接口监听处理访问流量。</p>
+<p>因此部署的时候还是建议使用gunicorn启动flask app, 并且使用NGINX对内部服务器进行反向代理。</p>
+<p>参考文档：<a href="http://exploreflask.com/en/latest/deployment.html" target="_blank" rel="external">Explore flask</a></p>
+<p>注意原生flask对代理支持不足，需要使用Werkzeug ProxyFix修复代理，详见上文档中ProxyFix section.</p>
+<h5 id="前端数据操作"><a href="#前端数据操作" class="headerlink" title="前端数据操作"></a>前端数据操作</h5><p>这块暂时也没看到很好的解决方案，最近在学习vuejs, 仿MVVC框架进行进一步的拆分，<br>由于WSL的支持问题无法使用webpack, 因此也无法体验MEAN框架下完整的功能。</p>
+<p>看了一些github上vue + flask的blog方案，但是暂时没有深入探索。</p>
+<p>MVVC是否可以做到进一步解耦仍有待实际操作研究。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/" data-id="ciztyj50j00141nsq1ej21l5a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-FSENdzwxy" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/01/30/FSENdzwxy/">Web全栈工程师的自我修养</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/01/30/FSENdzwxy/">
+            <time datetime="2017-01-29T17:28:05.000Z" itemprop="datePublished">2017-01-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/reading/">reading</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><img src="https://images-cn.ssl-images-amazon.com/images/I/41z%2Brh-Z0NL.jpg" alt="Web全栈工程师的自我修养"></p>
+<h3 id="Web全栈工程师的自我修养"><a href="#Web全栈工程师的自我修养" class="headerlink" title="Web全栈工程师的自我修养"></a><a href="https://www.amazon.cn/gp/product/B015317BNO/ref=oh_aui_d_detailpage_o02_?ie=UTF8&amp;psc=1" target="_blank" rel="external">Web全栈工程师的自我修养</a></h3><p>中亚kindle电子书活动淘的闲书，趁过年回家坐车的时间看完。读起来的感觉更像是作者的找工作回忆录+工作5年以后的流水账。<br>整个读下来感觉像是一篇参杂着回忆录的综述。从前端讲到后端，作者很推崇js的理念，实际也多用js做前端工作。</p>
+<p>kindle的排版看起来很乱，尤其是引用的部分里的引用书籍封面贴图大小不一，位置各异。</p>
+<h3 id="key-points"><a href="#key-points" class="headerlink" title="key points"></a>key points</h3><ul>
+<li>全栈的核心是解决问题，是撸起袖子快速迭代，而不是空想</li>
+<li>推荐Linode VPS, 并且强烈推荐自己弄个VPS练手，一方面是熟悉Linux环境，另一方面是熟悉部署调参</li>
+<li>校招的时候作品比简历更有价值</li>
+<li>设计的基本概念，亲密、对齐、重复、对比</li>
+<li>DRY原则，3次以上的复用直接解耦为单独的功能，否则为WET. (don’t repeart yourself vs. write everything twice)</li>
+<li>​ssh不使用root账号，登陆时尽量用key而不是输入明文密码</li>
+<li>早期经典web构架，LAMP - Linux Apache MySQL PHP</li>
+<li>要锻炼管理能力，亲力亲为重要并紧急的事情，安排好重要但不紧急的事情的日程，把紧急但不重要的事情分给别人，尽量少花时间在既不重要又不紧急的事情上</li>
+<li>锻炼身体，拒绝加班</li>
+</ul>
+<h3 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h3><ul>
+<li>现在有个试用期的AWS ec2 VPS用着练手，Ubuntu 16 LTS, 已经可以正常使用Linux相关功能</li>
+<li>后续读两本书：<em>写给大家看的设计</em>，<em>禅与摩托车维修艺术</em></li>
+<li>已经折腾了一个flask + gunicorn, 后续可以折腾的还有很多</li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/01/30/FSENdzwxy/" data-id="ciztyj50k001a1nsq1f5t7pex" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/01/30/FSENdzwxy/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/01/30/FSENdzwxy/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-jan24collision" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/01/30/jan24collision/">追尾危险，保持车距</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/01/30/jan24collision/">
+            <time datetime="2017-01-29T17:26:38.000Z" itemprop="datePublished">2017-01-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/misc/">misc</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/drive/">drive</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>如同标题所说，我由于没有保持好车距追尾了，全责。在回家的高速路上的车祸几乎把我所有的计划都打乱，汽车的两面性不得不让我对购车的必要性再次进行评估。</p>
+<h4 id="原因回溯"><a href="#原因回溯" class="headerlink" title="原因回溯"></a>原因回溯</h4><ul>
+<li><p>疲劳驾驶<br>这次计划凌晨4点出发，中午之前驶出高速拥堵路段尽快地道目的地。结果前一天为了处理项目一直忙到晚上10点回家，后来处理杂事至1点开始睡觉。<br>只睡了两个多小时就匆匆上路，再加之夜间行车非常消耗注意力，最终导致反应力迟钝。</p>
+</li>
+<li><p>跟车距离不足<br>之前上过防御性驾驶的课程，充分知晓4秒距离的必要性，这次盲目相信本车的制动能力，再加之赶时间急于赶路，故意无视了该原则，导致制动距离不足。<br>踩死了刹车仍然碰撞前车至对方后保险杠变形，后门变形，自己的车机盖变形，前进气格栅变形，内部支撑结构变形。<br>时速超过100 km/h的时候至少要保持3秒车距以留足制动距离。</p>
+</li>
+<li><p>定速巡航<br>距离收费站已经比较近的时候还在使用定速巡航功能且设置巡航速度超过100 km/h, 导致反应时间不足。</p>
+</li>
+<li><p>其他驾驶习惯<br>收费站前拥堵是常态，靠近收费站时没有及时减速。没有拉手刹辅助制动，切记拉手刹时要握紧方向盘。</p>
+</li>
+</ul>
+<h4 id="事故处理流程"><a href="#事故处理流程" class="headerlink" title="事故处理流程"></a>事故处理流程</h4><ol>
+<li><p>高速车道上停车是非常危险的行为，打双闪，拍照/录像，如果车子已经不能动了，人去应急车道外站着，如果还能动沟通好之后赶紧开到最近的检查点<br>或者服务区，如果两者都较远，停应急车道，摆好反光三角，人站到护栏外。</p>
+</li>
+<li><p>打12122联络高速交警出警，同时给自己的保险公司打电话上报事故。</p>
+</li>
+<li><p>等交警来现场出事故认定书</p>
+</li>
+<li><p>由于保险公司的车不上高架，如果还能开就跟事故相关车协调下高速联络当地的保险公司服务人员去高速出口现场交涉，确定报案号和定损方案。</p>
+</li>
+<li><p>一般是后续各自开到维修的4s店或者保险公司认可的维修店进行维修的时候联络保险公司，一般有驻店的相关保险公司现场处理人员协同进行定损。</p>
+</li>
+<li><p>按维修点的流程检查签字，等修好。</p>
+</li>
+<li><p>如果2车发生事故且自己是全责的状况下，对方的定损维修费用需要这边出，后拼发票到自己保险公司报销。</p>
+</li>
+<li><p>预计明年会涨保费…</p>
+</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>这次由于没办法年前修车，计划全乱，处理完事件该路段高速向我们目的地方向的入口由于事故过多直接封闭了。<br>最后到达目的地的时间已经比预计的晚太多，还不如上午多休息一会。<br>为了善后还要租车把东西和人都搬回家，春节期间不仅租车费用高，更有可能根本没车可租。</p>
+<p>不幸发生了这件事，有幸人都没事，车还能坚持住把我们带回家。</p>
+<p>切勿疲劳驾驶，切勿疲劳驾驶，切勿疲劳驾驶。</p>
+<p>如果以后换车，我还是会选马自达。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/01/30/jan24collision/" data-id="ciztyj504000n1nsq6lqozcyl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/01/30/jan24collision/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/01/30/jan24collision/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-single-page-tool-kit-by-vue" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/01/30/single-page-tool-kit-by-vue/">single page tool kit by vue</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/01/30/single-page-tool-kit-by-vue/">
+            <time datetime="2017-01-29T17:24:14.000Z" itemprop="datePublished">2017-01-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/coding/">coding</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/WSL/">WSL</a>, <a class="tag-link" href="/tags/flask/">flask</a>, <a class="tag-link" href="/tags/vue/">vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>给过年回家的自己定一个小目标，使用vue开发一个单页面小应用。</p>
+<p>应用主要实现2个功能，其一是为了复刻光伏开发速算的功能，其二是为了拓展aircase的分销渠道。<br>同时也借此熟悉前端开发的工作，希望之后也把icarus blog的主题更新为vue like.</p>
+<p>WSL暂时不支持webpack相关网络接口，构架方案需要更换。<br>—————– 分割线 —————–</p>
+<h2 id="todo"><a href="#todo" class="headerlink" title="todo:"></a>todo:</h2><ol>
+<li>挂linux系统开发</li>
+<li>把树莓派复活用VNC开发</li>
+<li>买个NMB… (&lt;-实力作死)</li>
+</ol>
+<p>—————– Feb 4 2017<br>跟随<a href="https://www.laravist.com/series/vue-js-1-0-in-action-series" target="_blank" rel="external">LARAVIST</a>视频学习vue 1.0相关知识内容，<br>课程虽然短但是演示内容比较直白容易理解。</p>
+<p>目前进度学到episode 4, 内容只覆盖到前端页面内的功能应用。之后更想看到的内容为MVVC的具体分层，数据库链接还有和后端的互动，部署。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/" data-id="ciztyj51t002f1nsq1ds1lkbe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-hightempsuperconductor" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -269,7 +892,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="ciyygwp7a000e0tsqnzpykr9x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="ciztyj4zz000i1nsqjo2z05d5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -433,7 +1056,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="ciyygwp7200080tsq5muthrvv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="ciztyj50a000y1nsq9n12ilf3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -571,8 +1194,8 @@
 <h3 id="read-and-think"><a href="#read-and-think" class="headerlink" title="read and think:"></a>read and think:</h3><hr>
 <ul>
 <li><del>the autobiography of Benjamin Franklin</del></li>
-<li>web development by flask</li>
-<li>angularjs即学即用</li>
+<li><del>web development by flask</del></li>
+<li><del>angularjs即学即用</del></li>
 <li><del>hand book of powershell 3.0</del></li>
 <li><del>http权威指南</del></li>
 </ul>
@@ -586,7 +1209,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="ciyygwp7j000p0tsqhgm9bpnn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="ciztyj508000t1nsq1dbcvwcz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -715,7 +1338,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="ciyygwp7m000u0tsqwllop3o3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="ciztyj50e00101nsqae9gfrz1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -809,6 +1432,82 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/03/03/quickwebsetup/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/81bKZBKImmL.jpg)" alt="快速建站学习笔记" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/coding/">coding</a></p>
+                            <p class="item-title"><a href="/2017/03/03/quickwebsetup/" class="title">快速建站学习笔记</a></p>
+                            <p class="item-date"><time datetime="2017-03-03T15:10:47.000Z" itemprop="datePublished">2017-03-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/03/Flask-Web-Development-Developing-Web-Applications-with-Python/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/51GsbpQfn2L.jpg)" alt="Flask Web Development:Developing Web Applications with Python/Flask Web开发:基于Python的Web应用开发实战" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
+                            <p class="item-title"><a href="/2017/03/03/Flask-Web-Development-Developing-Web-Applications-with-Python/" class="title">Flask Web Development:Developing Web Applications with Python/Flask Web开发:基于Python的Web应用开发实战</a></p>
+                            <p class="item-date"><time datetime="2017-03-03T15:10:33.000Z" itemprop="datePublished">2017-03-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/03/AngularJS-Up-and-Running/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/71BbM7FeWUL.jpg)" alt="AngularJS:Up and Running/AngularJS即学即用 " class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
+                            <p class="item-title"><a href="/2017/03/03/AngularJS-Up-and-Running/" class="title">AngularJS:Up and Running/AngularJS即学即用 </a></p>
+                            <p class="item-date"><time datetime="2017-03-03T15:10:21.000Z" itemprop="datePublished">2017-03-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/03/What-Engineers-Know-and-How-They-Know-It-Analytical-Studies-from-Aeronautical-History/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/51%2BTsr%2BxiWL.jpg)" alt="&#39;What Engineers Know and How They Know It-Analytical Studies from Aeronautical History/工程师知道什么以及他们是如何知道的:基于航空史的分析研究&#39;" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
+                            <p class="item-title"><a href="/2017/03/03/What-Engineers-Know-and-How-They-Know-It-Analytical-Studies-from-Aeronautical-History/" class="title">&#39;What Engineers Know and How They Know It-Analytical Studies from Aeronautical History/工程师知道什么以及他们是如何知道的:基于航空史的分析研究&#39;</a></p>
+                            <p class="item-date"><time datetime="2017-03-03T15:10:02.000Z" itemprop="datePublished">2017-03-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/02/09/learn-windows-powershell-in-a-month-of-lunches/" class="thumbnail">
     
     
@@ -825,82 +1524,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/09/The-autobiography-of-Benjamin-Franklin/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/41Zf-ppTSCL._SX260_.jpg)" alt="The autobiography of Benjamin Franklin/富兰克林自传" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
-                            <p class="item-title"><a href="/2017/02/09/The-autobiography-of-Benjamin-Franklin/" class="title">The autobiography of Benjamin Franklin/富兰克林自传</a></p>
-                            <p class="item-date"><time datetime="2017-02-08T16:13:35.000Z" itemprop="datePublished">2017-02-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/08/http-the-definitive-guide/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/51Roixalg4L._SX260_.jpg)" alt="http权威指南" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
-                            <p class="item-title"><a href="/2017/02/08/http-the-definitive-guide/" class="title">http权威指南</a></p>
-                            <p class="item-date"><time datetime="2017-02-08T15:40:33.000Z" itemprop="datePublished">2017-02-08</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/07/roof-detection-by-opencv/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://re360.in/assets/images/vectoricon01.jpg)" alt="roof detection by opencv" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/coding/">coding</a></p>
-                            <p class="item-title"><a href="/2017/02/07/roof-detection-by-opencv/" class="title">roof detection by opencv</a></p>
-                            <p class="item-date"><time datetime="2017-02-07T09:26:45.000Z" itemprop="datePublished">2017-02-07</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/06/practice-of-raspberry-pi-2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://1.bp.blogspot.com/-ri6tbJi1W_I/Vt_iefsijgI/AAAAAAAABnA/1U-9VGRZYXI/s1600/raspberry-pi-b.jpg)" alt="practice of raspberry pi 2" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/coding/">coding</a></p>
-                            <p class="item-title"><a href="/2017/02/06/practice-of-raspberry-pi-2/" class="title">practice of raspberry pi 2</a></p>
-                            <p class="item-date"><time datetime="2017-02-06T14:34:48.000Z" itemprop="datePublished">2017-02-06</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -910,7 +1533,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">5</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">8</span></li></ul>
         </div>
     </div>
 
@@ -919,7 +1542,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
         </div>
     </div>
 
@@ -928,7 +1551,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-map-api/">google map api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aeronautics/">aeronautics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/godaddy/">godaddy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-map-api/">google map api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -937,7 +1560,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 10px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 20px;">WSL</a> <a href="/tags/amap-api/" style="font-size: 15px;">amap api</a> <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 15px;">flask</a> <a href="/tags/google-map-api/" style="font-size: 10px;">google map api</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
+            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 10px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 16.67px;">WSL</a> <a href="/tags/aeronautics/" style="font-size: 10px;">aeronautics</a> <a href="/tags/amap-api/" style="font-size: 13.33px;">amap api</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 16.67px;">flask</a> <a href="/tags/godaddy/" style="font-size: 10px;">godaddy</a> <a href="/tags/google-map-api/" style="font-size: 10px;">google map api</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
         </div>
     </div>
 
