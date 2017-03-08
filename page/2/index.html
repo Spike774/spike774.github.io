@@ -153,7 +153,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                19
+                20
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -200,6 +200,167 @@
 
             
             <section id="main">
+    <article id="post-practice-of-raspberry-pi-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/06/practice-of-raspberry-pi-2/">practice of raspberry pi 2</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/06/practice-of-raspberry-pi-2/">
+            <time datetime="2017-02-06T14:34:48.000Z" itemprop="datePublished">2017-02-06</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/coding/">coding</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/debian/">debian</a>, <a class="tag-link" href="/tags/raspberry-pi/">raspberry pi</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h3><hr>
+<p>2014年还在深圳的时候想尝试一下智能家居相关的业务和具体的玩法，入了raspberry pi2的板卡、亚克力外壳、2A的适配器和一个腾达的无线网卡。</p>
+<p>rp2使用低功耗的arm处理器，装载debian系统，主板采用最简化配置和有限的接口，整个面积只有公交卡大小。用hdmi线连接显示器，接好键盘，插入存着<br>预安装程序的sd卡即可开始安装。设置为固定ip之后就可以使用ssh或者vnc远程登录。</p>
+<p>raspberry pi有强大的GPIO接口，方便连接其他控制元件，例如电气控制中最常用的继电保护装置。<br>当时主要跟随以下三本书的内容推进。</p>
+<p><a href="https://www.amazon.cn/gp/product/B00EPF790U/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1" target="_blank" rel="external">爱上Raspberry Pi</a></p>
+<p><a href="https://www.amazon.cn/gp/product/B00KLAQ954/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1" target="_blank" rel="external">Linux+树莓派玩转智能家居(第2版)</a></p>
+<p><a href="https://www.amazon.cn/gp/product/B00HTXKSL2/ref=oh_aui_detailpage_o00_s00?ie=UTF8&amp;psc=1" target="_blank" rel="external">Raspberry Pi:Python编程入门</a></p>
+<p>也间接增加了搬家时候的负担和痛苦。</p>
+<p>言归正传，也是从rp2开始接触Linux系统，顺便在14年在edx跟完了两门很重要的课程: Introduction to Computing with java, Indroduction to Linux.<br>也趁此机会复习了一下模拟电路里的知识和电子器件。</p>
+<p>借着在深圳的地利也买了块面包板和一堆杜邦线，传感器件。最后半途而废，搬家的时候还随身带着这些东西，警示着自己的怠惰。</p>
+<p>少了一份填坑的坚持。不知道是不是因为随着年龄的增长越要想在行动前看到利益，更加世俗了。</p>
+<p>回溯起来，从15年1月开始之后的第7周，知道了办公室即将于4月底解散。忙于下一份旅途的不确定性，耽误了下来。最终绕了一圈，又回到了上海。</p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><hr>
+<p>基于debian, 并且很方便利用python程序调用GPIO接口，但是最后没有试验成功。<br>所以这块暂时就没有代码可以展示。</p>
+<h3 id="trouble-shooting"><a href="#trouble-shooting" class="headerlink" title="trouble shooting"></a>trouble shooting</h3><hr>
+<p>再次摘录一些归档的笔记和荒废在csdn blog里的一些东西。</p>
+<p><br></p>
+<h5 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h5><p>端子25电压为3.3V, 和arduino的电压不同，不能混用，切记。</p>
+<p><a href="https://pypi.python.org/pypi/RPi.GPIO" target="_blank" rel="external">GPIO python pkg</a>可以找到相关脚本python支持包。</p>
+<p><br></p>
+<h5 id="Raspberry-pi-2-适配器型号"><a href="#Raspberry-pi-2-适配器型号" class="headerlink" title="Raspberry pi 2 适配器型号"></a>Raspberry pi 2 适配器型号</h5><p>为了稳定运行，请使用5V 2A适配器。</p>
+<p><br></p>
+<h5 id="公网IP和远程登入"><a href="#公网IP和远程登入" class="headerlink" title="公网IP和远程登入"></a>公网IP和远程登入</h5><p>当时想通过微信远程遥控，因此遇到了公网IP的问题。电信用户一般都是有公网IP的，但是不是固定IP, 每隔一段时间会有变动。<br>使用花生壳可以进行内网穿透，但是当时没有找到完美的解决方案，在debian系统内安装成功，但是没有调试成功。</p>
+<p>电信一般是封锁80端口，因此需要通过其他途径绕开。一般使用vps部署NGINX反向代理解决。</p>
+<p>Yeelink也提供一些内网穿透的解决方案，但是个人最终没有调试成功。</p>
+<p>当时也希望用pi架设一个blog, 由于公网IP的问题最终也作罢。不过2年之后在github上实现了久远的愿望，也不错。</p>
+<p><br></p>
+<h5 id="LCD1602"><a href="#LCD1602" class="headerlink" title="LCD1602"></a>LCD1602</h5><p>参考接线完成后成功点亮LCD，由于没有电位器所以不能调节LCD亮度。</p>
+<p>连接液晶屏：<br>LCD1602液晶屏提供了16列x2行的ASCII字符显示能力，工作电压5V，<br>提供4位数据与8位数据两种工作模式，Raspberry Pi的GPIO口数量很有限，所以我们使用4位数据模式。</p>
+<p>LCD1602液晶屏模块提供了16个引脚，我们只需接其中的12个即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">1. VSS，接地，RPi PIN 6</div><div class="line">2. VDD，接5V电源，PRi PIN 2</div><div class="line">3. VO，液晶对比度调节，接电位器中间的引脚</div><div class="line">4. RS，寄存器选择，接GPIO 14，RPi PIN 8</div><div class="line">5. RW，读写选择，接地，表示写模式，PRi PIN 6</div><div class="line">6. EN，使能信号，接GPIO 15，RPi PIN 10</div><div class="line">7. D0，数据位0，4位工作模式下不用，不接</div><div class="line">8. D1，数据位1，4位工作模式下不用，不接</div><div class="line">9. D2，数据位2，4位工作模式下不用，不接</div><div class="line">10. D3，数据位3，4位工作模式下不用，不接</div><div class="line">11. D4，数据位4，接GPIO 17，RPi PIN 11</div><div class="line">12. D5，数据位5，接GPIO 18，RPi PIN 12</div><div class="line">13. D6，数据位6，接GPIO 27，RPi PIN 13</div><div class="line">14. D7，数据位7，接GPIO 22，RPi PIN 15</div><div class="line">15. A，液晶屏背光+，接5V，RPi PIN 2</div><div class="line">16. K，液晶屏背光-，接地，RPi PIN 6</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/" data-id="cj00sj3yt000t0tsqk0uag362" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -252,7 +413,7 @@
 </blockquote>
 <h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><hr>
 <p>其中部分代码详见下文，在第三行的<strong>YOUR_API_KEY</strong>中对应的是开发者自己申请的API KEY.<br>各家的js api key都是无配额限制，但是无法理解的一点是无法隐藏该API KEY,<br>即无法在script src字段内使用变量。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/es5.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/addToolbar.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://webapi.amap.com/maps?v=1.3&amp;key=YOUR_API_KEY&amp;plugin=AMap.MouseTool"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="xml"></span></div><div class="line">    // set up map canvas.</div><div class="line">    var map = new AMap.Map('container', &#123;</div><div class="line">        resizeEnable: true,</div><div class="line">        center: [121.405034,31.164609],</div><div class="line">        zoom: 16</div><div class="line">    &#125;);</div><div class="line">    map.setDefaultCursor("crosshair");</div><div class="line"></div><div class="line"></div><div class="line">    // set up marker.</div><div class="line">    var marker = new AMap.Marker(&#123;</div><div class="line">        position: [121.405034,31.164609]</div><div class="line">    &#125;);</div><div class="line">    marker.setMap(map);</div><div class="line"></div><div class="line"></div><div class="line">    // click event to open marker.</div><div class="line">    marker.on('click',function(e)&#123;</div><div class="line">       infowindow.open(map,e.target.getPosition());</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    // advanced marker, more info.</div><div class="line">    AMap.plugin('AMap.AdvancedInfoWindow',function()&#123;</div><div class="line">       infowindow = new AMap.AdvancedInfoWindow(&#123;</div><div class="line">        content: '<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"info-title"</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"info-content"</span>&gt;</span>'+</div><div class="line">                 '<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://webapi.amap.com/images/amap.jpg"</span>&gt;</span>'+</div><div class="line">                 'XXX!<span class="tag">&lt;<span class="name">br</span>/&gt;</span>'+</div><div class="line">                 '<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-envelope"</span> <span class="attr">href</span> = <span class="string">"mailto:info@XXXcn.com"</span>&gt;</span>moreinfo<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>',</div><div class="line">        offset: new AMap.Pixel(0, -30)</div><div class="line">      &#125;);</div><div class="line">      infowindow.open(map,[121.405034,31.164609]);</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    // enable tool kits.</div><div class="line">    AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.OverView','AMap.MapType'],</div><div class="line">        function()&#123;</div><div class="line">            map.addControl(new AMap.ToolBar());</div><div class="line"></div><div class="line">            map.addControl(new AMap.Scale());</div><div class="line"></div><div class="line">            map.addControl(new AMap.OverView(&#123;isOpen:true&#125;)); //遮挡button-group</div><div class="line"></div><div class="line">            map.addControl(new AMap.MapType(&#123;defaultType:1&#125;));</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"></div><div class="line">    // right button functions.</div><div class="line">    var mouseTool = new AMap.MouseTool(map);</div><div class="line">    AMap.event.addDomListener(document.getElementById('areaMeasure'), 'click', function() &#123;</div><div class="line">         //鼠标工具插件添加draw事件监听</div><div class="line">        AMap.event.addListener(mouseTool, "draw", function callback(e) &#123;</div><div class="line">            var eObject = e.obj;  //obj属性就是鼠标事件完成所绘制的覆盖物对象。</div><div class="line">        &#125;);</div><div class="line">        mouseTool.measureArea();  //调用鼠标工具的面积量测功能</div><div class="line">        map.on('dblclick', function() &#123;</div><div class="line">            mouseTool.close('True');</div><div class="line">        &#125;);</div><div class="line">    &#125;, false);</div><div class="line"></div><div class="line"></div><div class="line">    AMap.event.addDomListener(document.getElementById('eargleEye'), 'click', function() &#123;</div><div class="line">        var drawRectangle = mouseTool.rectangle(); //用鼠标工具画矩形</div><div class="line">        AMap.event.addListener( mouseTool,'draw',function(e)&#123; //添加事件</div><div class="line">        var rect = e.obj;</div><div class="line">        var data = &#123;"minLng" : rect.getBounds().getSouthWest( ).getLng(),</div><div class="line">                    "maxLng" : rect.getBounds().getNorthEast( ).getLng(),</div><div class="line">                    "minLat" : rect.getBounds().getSouthWest( ).getLat(),</div><div class="line">                    "maxLat" : rect.getBounds().getNorthEast( ).getLat(),</div><div class="line">                    "cLng" : rect.getBounds().getCenter( ).getLng(),</div><div class="line">                    "cLat" : rect.getBounds().getCenter( ).getLat()</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line"></div><div class="line">        if(confirm("are you sure to submit?"))</div><div class="line">                &#123;</div><div class="line">                        $.post(&#123;</div><div class="line">                            url : "&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;",</div><div class="line">                            data: JSON.stringify(data),</div><div class="line">                            contentType: 'application/json;charset=UTF-8',</div><div class="line">                            success: function(data) &#123;</div><div class="line">                              top.location.href = "&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;";                              </div><div class="line">                            &#125;,</div><div class="line">                            async:false</div><div class="line">                        &#125;);</div><div class="line">                &#125;</div><div class="line">                else</div><div class="line">                &#123;</div><div class="line">                         mouseTool.close(true);</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;, false);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/es5.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/addToolbar.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://webapi.amap.com/maps?v=1.3&amp;key=YOUR_API_KEY&amp;plugin=AMap.MouseTool"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="comment">// set up map canvas.</span></div><div class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> AMap.Map(<span class="string">'container'</span>, &#123;</div><div class="line">        <span class="attr">resizeEnable</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">center</span>: [<span class="number">121.405034</span>,<span class="number">31.164609</span>],</div><div class="line">        <span class="attr">zoom</span>: <span class="number">16</span></div><div class="line">    &#125;);</div><div class="line">    map.setDefaultCursor(<span class="string">"crosshair"</span>);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// set up marker.</span></div><div class="line">    <span class="keyword">var</span> marker = <span class="keyword">new</span> AMap.Marker(&#123;</div><div class="line">        <span class="attr">position</span>: [<span class="number">121.405034</span>,<span class="number">31.164609</span>]</div><div class="line">    &#125;);</div><div class="line">    marker.setMap(map);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// click event to open marker.</span></div><div class="line">    marker.on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">       infowindow.open(map,e.target.getPosition());</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// advanced marker, more info.</span></div><div class="line">    AMap.plugin(<span class="string">'AMap.AdvancedInfoWindow'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       infowindow = <span class="keyword">new</span> AMap.AdvancedInfoWindow(&#123;</div><div class="line">        <span class="attr">content</span>: <span class="string">'&lt;div class="info-title"&gt;XXX&lt;/div&gt;&lt;div class="info-content"&gt;'</span>+</div><div class="line">                 <span class="string">'&lt;img src="http://webapi.amap.com/images/amap.jpg"&gt;'</span>+</div><div class="line">                 <span class="string">'XXX!&lt;br/&gt;'</span>+</div><div class="line">                 <span class="string">'&lt;a class="glyphicon glyphicon-envelope" href = "mailto:info@XXXcn.com"&gt;moreinfo&lt;/a&gt;&lt;/div&gt;'</span>,</div><div class="line">        <span class="attr">offset</span>: <span class="keyword">new</span> AMap.Pixel(<span class="number">0</span>, <span class="number">-30</span>)</div><div class="line">      &#125;);</div><div class="line">      infowindow.open(map,[<span class="number">121.405034</span>,<span class="number">31.164609</span>]);</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// enable tool kits.</span></div><div class="line">    AMap.plugin([<span class="string">'AMap.ToolBar'</span>,<span class="string">'AMap.Scale'</span>,<span class="string">'AMap.OverView'</span>,<span class="string">'AMap.MapType'</span>],</div><div class="line">        <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.ToolBar());</div><div class="line"></div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.Scale());</div><div class="line"></div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.OverView(&#123;<span class="attr">isOpen</span>:<span class="literal">true</span>&#125;)); <span class="comment">//遮挡button-group</span></div><div class="line"></div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.MapType(&#123;<span class="attr">defaultType</span>:<span class="number">1</span>&#125;));</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// right button functions.</span></div><div class="line">    <span class="keyword">var</span> mouseTool = <span class="keyword">new</span> AMap.MouseTool(map);</div><div class="line">    AMap.event.addDomListener(<span class="built_in">document</span>.getElementById(<span class="string">'areaMeasure'</span>), <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="comment">//鼠标工具插件添加draw事件监听</span></div><div class="line">        AMap.event.addListener(mouseTool, <span class="string">"draw"</span>, <span class="function"><span class="keyword">function</span> <span class="title">callback</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> eObject = e.obj;  <span class="comment">//obj属性就是鼠标事件完成所绘制的覆盖物对象。</span></div><div class="line">        &#125;);</div><div class="line">        mouseTool.measureArea();  <span class="comment">//调用鼠标工具的面积量测功能</span></div><div class="line">        map.on(<span class="string">'dblclick'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            mouseTool.close(<span class="string">'True'</span>);</div><div class="line">        &#125;);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line"></div><div class="line">    AMap.event.addDomListener(<span class="built_in">document</span>.getElementById(<span class="string">'eargleEye'</span>), <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> drawRectangle = mouseTool.rectangle(); <span class="comment">//用鼠标工具画矩形</span></div><div class="line">        AMap.event.addListener( mouseTool,<span class="string">'draw'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123; <span class="comment">//添加事件</span></div><div class="line">        <span class="keyword">var</span> rect = e.obj;</div><div class="line">        <span class="keyword">var</span> data = &#123;<span class="string">"minLng"</span> : rect.getBounds().getSouthWest( ).getLng(),</div><div class="line">                    <span class="string">"maxLng"</span> : rect.getBounds().getNorthEast( ).getLng(),</div><div class="line">                    <span class="string">"minLat"</span> : rect.getBounds().getSouthWest( ).getLat(),</div><div class="line">                    <span class="string">"maxLat"</span> : rect.getBounds().getNorthEast( ).getLat(),</div><div class="line">                    <span class="string">"cLng"</span> : rect.getBounds().getCenter( ).getLng(),</div><div class="line">                    <span class="string">"cLat"</span> : rect.getBounds().getCenter( ).getLat()</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">if</span>(confirm(<span class="string">"are you sure to submit?"</span>))</div><div class="line">                &#123;</div><div class="line">                        $.post(&#123;</div><div class="line">                            <span class="attr">url</span> : <span class="string">"&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;"</span>,</div><div class="line">                            <span class="attr">data</span>: <span class="built_in">JSON</span>.stringify(data),</div><div class="line">                            <span class="attr">contentType</span>: <span class="string">'application/json;charset=UTF-8'</span>,</div><div class="line">                            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">                              top.location.href = <span class="string">"&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;"</span>;                              </div><div class="line">                            &#125;,</div><div class="line">                            <span class="attr">async</span>:<span class="literal">false</span></div><div class="line">                        &#125;);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                         mouseTool.close(<span class="literal">true</span>);</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
 <li>实现的功能详见代码内注释的文档，其他明细可详询<a href="http://lbs.amap.com/api/javascript-api/guide/create-map/show-map/" target="_blank" rel="external">官方文档</a></li>
 <li>官方的实例中心内有详实的案例供参考引用</li>
@@ -279,7 +440,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/04/best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api/" data-id="cizycxqo100062ksqrww9w11n" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/04/best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api/" data-id="cj00sj3yq000n0tsqjowvia60" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -447,7 +608,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/" data-id="cizycxqo6000b2ksqafdxyv5c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/" data-id="cj00sj3yj000h0tsqf7auedtq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -597,7 +758,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/FSENdzwxy/" data-id="cizycxqny00052ksqs55ie4g9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/FSENdzwxy/" data-id="cj00sj3xh00070tsq74gtnk1t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -761,7 +922,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/jan24collision/" data-id="cizycxqof000l2ksq9z44ir41" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/jan24collision/" data-id="cj00sj405001m0tsqsujui3ut" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -902,7 +1063,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/" data-id="cizycxqop00112ksqv13wfaz6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/" data-id="cj00sj3z400120tsq6wolcpgy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1049,7 +1210,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="cizycxqo300082ksqpm5mp5b8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="cj00sj3ym000j0tsqkwyepaot" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1213,7 +1374,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="cizycxqnp00012ksq8alnlt48" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="cj00sj3y9000d0tsq32kmiupe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1366,7 +1527,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="cizycxqol000t2ksq5642ex6b" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="cj00sj3yv000w0tsqpjul6knm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1495,7 +1656,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="cizycxqoi000p2ksqbsdkmhcw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="cj00sj3yz00110tsq25i1cmic" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1589,6 +1750,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/03/08/mountain/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://2.bp.blogspot.com/-k-Gwn5nap7w/UaWjYADvC7I/AAAAAAAAFfU/sXmTohu6XUc/s1600/iss-iss-photos-space-station-in-space.jpg)" alt="山" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/misc/">misc</a></p>
+                            <p class="item-title"><a href="/2017/03/08/mountain/" class="title">山</a></p>
+                            <p class="item-date"><time datetime="2017-03-08T09:57:12.000Z" itemprop="datePublished">2017-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/03/07/tcpipins/" class="thumbnail">
     
     
@@ -1662,25 +1842,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/03/03/What-Engineers-Know-and-How-They-Know-It-Analytical-Studies-from-Aeronautical-History/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/51%2BTsr%2BxiWL.jpg)" alt="&#39;What Engineers Know and How They Know It-Analytical Studies from Aeronautical History/工程师知道什么以及他们是如何知道的:基于航空史的分析研究&#39;" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
-                            <p class="item-title"><a href="/2017/03/03/What-Engineers-Know-and-How-They-Know-It-Analytical-Studies-from-Aeronautical-History/" class="title">&#39;What Engineers Know and How They Know It-Analytical Studies from Aeronautical History/工程师知道什么以及他们是如何知道的:基于航空史的分析研究&#39;</a></p>
-                            <p class="item-date"><time datetime="2017-03-03T15:10:02.000Z" itemprop="datePublished">2017-03-03</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1690,7 +1851,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">9</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">9</span></li></ul>
         </div>
     </div>
 
@@ -1699,7 +1860,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
         </div>
     </div>
 
