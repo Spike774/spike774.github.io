@@ -153,7 +153,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                21
+                22
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -200,6 +200,155 @@
 
             
             <section id="main">
+    <article id="post-http-the-definitive-guide" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/08/http-the-definitive-guide/">http权威指南</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/08/http-the-definitive-guide/">
+            <time datetime="2017-02-08T15:40:33.000Z" itemprop="datePublished">2017-02-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/reading/">reading</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/http/">http</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><img src="https://images-cn.ssl-images-amazon.com/images/I/51Roixalg4L._SX260_.jpg" alt="HTTP权威指南"></p>
+<h3 id="HTTP权威指南"><a href="#HTTP权威指南" class="headerlink" title="HTTP权威指南"></a><a href="https://www.amazon.cn/gp/product/B00M2DKYRC/ref=oh_aui_d_detailpage_o09_?ie=UTF8&amp;psc=1" target="_blank" rel="external">HTTP权威指南</a></h3><p>同为亚马逊kindle活动时候1毛买书，屯着看。2013年的日版kpw2也马上要陪我走过第四个年头。<br>陪我从上海到深圳，又回到上海，陪我从传统能源行业到新能源行业甚至到写代码开博客，拓展出更多的可能。</p>
+<p>该书在2014年初识python的时候就听闻大名，去年Q4用flask写网站调试也遇到了相关问题，正好补充这块的知识。<br>本书也非本专业内的书，因此就过的快一些，待到用时再回看。但是电子书不方便回溯也是算是缺点之一吧。</p>
+<h3 id="key-points"><a href="#key-points" class="headerlink" title="key points"></a>key points</h3><ul>
+<li>http版本众多，某些版本不向下兼容</li>
+<li>http头文件内含重要信息</li>
+<li>重要的方法,GET POST DELETE等</li>
+<li>服务器回执码，有很多预留位，但是总的来说2XX是成功，3XX是含警告，4XX是未找到等各种问题，5XX是服务器内部发生错误</li>
+<li>404是常见错误，未找到</li>
+<li>500也是服务器内部代理错误</li>
+<li>除了url还有uri来标识网络地址</li>
+<li>https开始普及，443端口，ssl安全连接</li>
+</ul>
+<h3 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h3><ul>
+<li>书是好书可能是我看太快了没有太顾及的到细节，本书中提到了DOM但是也没有细讲，之前写网站的过程中文本信息的前后端传递这块确实发生了困扰。</li>
+<li>提到了DNS解析和反向代理相关的内容，回顾起来也突然没了很明显的印象，最近在同步看TCP/IP相关的书，也有可能是错觉</li>
+<li>考虑要不要收一本纸质书</li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/02/08/http-the-definitive-guide/" data-id="cj38qu4wz000f0usqzkdwgzjn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/02/08/http-the-definitive-guide/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/02/08/http-the-definitive-guide/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-roof-detection-by-opencv" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -288,7 +437,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/07/roof-detection-by-opencv/" data-id="cj0grn4zj001l24sqeylax5pl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/07/roof-detection-by-opencv/" data-id="cj38qu4y3001i0usqixorelew" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -449,7 +598,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/" data-id="cj0grn4yj000l24sqwoeuo9zw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/06/practice-of-raspberry-pi-2/" data-id="cj38qu4xe00150usq9wjrlcv6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -579,7 +728,7 @@
 </blockquote>
 <h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><hr>
 <p>其中部分代码详见下文，在第三行的<strong>YOUR_API_KEY</strong>中对应的是开发者自己申请的API KEY.<br>各家的js api key都是无配额限制，但是无法理解的一点是无法隐藏该API KEY,<br>即无法在script src字段内使用变量。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/es5.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/addToolbar.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://webapi.amap.com/maps?v=1.3&amp;key=YOUR_API_KEY&amp;plugin=AMap.MouseTool"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="xml"></span></div><div class="line">    // set up map canvas.</div><div class="line">    var map = new AMap.Map('container', &#123;</div><div class="line">        resizeEnable: true,</div><div class="line">        center: [121.405034,31.164609],</div><div class="line">        zoom: 16</div><div class="line">    &#125;);</div><div class="line">    map.setDefaultCursor("crosshair");</div><div class="line"></div><div class="line"></div><div class="line">    // set up marker.</div><div class="line">    var marker = new AMap.Marker(&#123;</div><div class="line">        position: [121.405034,31.164609]</div><div class="line">    &#125;);</div><div class="line">    marker.setMap(map);</div><div class="line"></div><div class="line"></div><div class="line">    // click event to open marker.</div><div class="line">    marker.on('click',function(e)&#123;</div><div class="line">       infowindow.open(map,e.target.getPosition());</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    // advanced marker, more info.</div><div class="line">    AMap.plugin('AMap.AdvancedInfoWindow',function()&#123;</div><div class="line">       infowindow = new AMap.AdvancedInfoWindow(&#123;</div><div class="line">        content: '<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"info-title"</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"info-content"</span>&gt;</span>'+</div><div class="line">                 '<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://webapi.amap.com/images/amap.jpg"</span>&gt;</span>'+</div><div class="line">                 'XXX!<span class="tag">&lt;<span class="name">br</span>/&gt;</span>'+</div><div class="line">                 '<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-envelope"</span> <span class="attr">href</span> = <span class="string">"mailto:info@XXXcn.com"</span>&gt;</span>moreinfo<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>',</div><div class="line">        offset: new AMap.Pixel(0, -30)</div><div class="line">      &#125;);</div><div class="line">      infowindow.open(map,[121.405034,31.164609]);</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    // enable tool kits.</div><div class="line">    AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.OverView','AMap.MapType'],</div><div class="line">        function()&#123;</div><div class="line">            map.addControl(new AMap.ToolBar());</div><div class="line"></div><div class="line">            map.addControl(new AMap.Scale());</div><div class="line"></div><div class="line">            map.addControl(new AMap.OverView(&#123;isOpen:true&#125;)); //遮挡button-group</div><div class="line"></div><div class="line">            map.addControl(new AMap.MapType(&#123;defaultType:1&#125;));</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"></div><div class="line">    // right button functions.</div><div class="line">    var mouseTool = new AMap.MouseTool(map);</div><div class="line">    AMap.event.addDomListener(document.getElementById('areaMeasure'), 'click', function() &#123;</div><div class="line">         //鼠标工具插件添加draw事件监听</div><div class="line">        AMap.event.addListener(mouseTool, "draw", function callback(e) &#123;</div><div class="line">            var eObject = e.obj;  //obj属性就是鼠标事件完成所绘制的覆盖物对象。</div><div class="line">        &#125;);</div><div class="line">        mouseTool.measureArea();  //调用鼠标工具的面积量测功能</div><div class="line">        map.on('dblclick', function() &#123;</div><div class="line">            mouseTool.close('True');</div><div class="line">        &#125;);</div><div class="line">    &#125;, false);</div><div class="line"></div><div class="line"></div><div class="line">    AMap.event.addDomListener(document.getElementById('eargleEye'), 'click', function() &#123;</div><div class="line">        var drawRectangle = mouseTool.rectangle(); //用鼠标工具画矩形</div><div class="line">        AMap.event.addListener( mouseTool,'draw',function(e)&#123; //添加事件</div><div class="line">        var rect = e.obj;</div><div class="line">        var data = &#123;"minLng" : rect.getBounds().getSouthWest( ).getLng(),</div><div class="line">                    "maxLng" : rect.getBounds().getNorthEast( ).getLng(),</div><div class="line">                    "minLat" : rect.getBounds().getSouthWest( ).getLat(),</div><div class="line">                    "maxLat" : rect.getBounds().getNorthEast( ).getLat(),</div><div class="line">                    "cLng" : rect.getBounds().getCenter( ).getLng(),</div><div class="line">                    "cLat" : rect.getBounds().getCenter( ).getLat()</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line"></div><div class="line">        if(confirm("are you sure to submit?"))</div><div class="line">                &#123;</div><div class="line">                        $.post(&#123;</div><div class="line">                            url : "&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;",</div><div class="line">                            data: JSON.stringify(data),</div><div class="line">                            contentType: 'application/json;charset=UTF-8',</div><div class="line">                            success: function(data) &#123;</div><div class="line">                              top.location.href = "&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;";                              </div><div class="line">                            &#125;,</div><div class="line">                            async:false</div><div class="line">                        &#125;);</div><div class="line">                &#125;</div><div class="line">                else</div><div class="line">                &#123;</div><div class="line">                         mouseTool.close(true);</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;, false);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/es5.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://cache.amap.com/lbs/static/addToolbar.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://webapi.amap.com/maps?v=1.3&amp;key=YOUR_API_KEY&amp;plugin=AMap.MouseTool"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="comment">// set up map canvas.</span></div><div class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> AMap.Map(<span class="string">'container'</span>, &#123;</div><div class="line">        <span class="attr">resizeEnable</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">center</span>: [<span class="number">121.405034</span>,<span class="number">31.164609</span>],</div><div class="line">        <span class="attr">zoom</span>: <span class="number">16</span></div><div class="line">    &#125;);</div><div class="line">    map.setDefaultCursor(<span class="string">"crosshair"</span>);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// set up marker.</span></div><div class="line">    <span class="keyword">var</span> marker = <span class="keyword">new</span> AMap.Marker(&#123;</div><div class="line">        <span class="attr">position</span>: [<span class="number">121.405034</span>,<span class="number">31.164609</span>]</div><div class="line">    &#125;);</div><div class="line">    marker.setMap(map);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// click event to open marker.</span></div><div class="line">    marker.on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">       infowindow.open(map,e.target.getPosition());</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// advanced marker, more info.</span></div><div class="line">    AMap.plugin(<span class="string">'AMap.AdvancedInfoWindow'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       infowindow = <span class="keyword">new</span> AMap.AdvancedInfoWindow(&#123;</div><div class="line">        <span class="attr">content</span>: <span class="string">'&lt;div class="info-title"&gt;XXX&lt;/div&gt;&lt;div class="info-content"&gt;'</span>+</div><div class="line">                 <span class="string">'&lt;img src="http://webapi.amap.com/images/amap.jpg"&gt;'</span>+</div><div class="line">                 <span class="string">'XXX!&lt;br/&gt;'</span>+</div><div class="line">                 <span class="string">'&lt;a class="glyphicon glyphicon-envelope" href = "mailto:info@XXXcn.com"&gt;moreinfo&lt;/a&gt;&lt;/div&gt;'</span>,</div><div class="line">        <span class="attr">offset</span>: <span class="keyword">new</span> AMap.Pixel(<span class="number">0</span>, <span class="number">-30</span>)</div><div class="line">      &#125;);</div><div class="line">      infowindow.open(map,[<span class="number">121.405034</span>,<span class="number">31.164609</span>]);</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// enable tool kits.</span></div><div class="line">    AMap.plugin([<span class="string">'AMap.ToolBar'</span>,<span class="string">'AMap.Scale'</span>,<span class="string">'AMap.OverView'</span>,<span class="string">'AMap.MapType'</span>],</div><div class="line">        <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.ToolBar());</div><div class="line"></div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.Scale());</div><div class="line"></div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.OverView(&#123;<span class="attr">isOpen</span>:<span class="literal">true</span>&#125;)); <span class="comment">//遮挡button-group</span></div><div class="line"></div><div class="line">            map.addControl(<span class="keyword">new</span> AMap.MapType(&#123;<span class="attr">defaultType</span>:<span class="number">1</span>&#125;));</div><div class="line">    &#125;);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// right button functions.</span></div><div class="line">    <span class="keyword">var</span> mouseTool = <span class="keyword">new</span> AMap.MouseTool(map);</div><div class="line">    AMap.event.addDomListener(<span class="built_in">document</span>.getElementById(<span class="string">'areaMeasure'</span>), <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="comment">//鼠标工具插件添加draw事件监听</span></div><div class="line">        AMap.event.addListener(mouseTool, <span class="string">"draw"</span>, <span class="function"><span class="keyword">function</span> <span class="title">callback</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> eObject = e.obj;  <span class="comment">//obj属性就是鼠标事件完成所绘制的覆盖物对象。</span></div><div class="line">        &#125;);</div><div class="line">        mouseTool.measureArea();  <span class="comment">//调用鼠标工具的面积量测功能</span></div><div class="line">        map.on(<span class="string">'dblclick'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            mouseTool.close(<span class="string">'True'</span>);</div><div class="line">        &#125;);</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line"></div><div class="line">    AMap.event.addDomListener(<span class="built_in">document</span>.getElementById(<span class="string">'eargleEye'</span>), <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> drawRectangle = mouseTool.rectangle(); <span class="comment">//用鼠标工具画矩形</span></div><div class="line">        AMap.event.addListener( mouseTool,<span class="string">'draw'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123; <span class="comment">//添加事件</span></div><div class="line">        <span class="keyword">var</span> rect = e.obj;</div><div class="line">        <span class="keyword">var</span> data = &#123;<span class="string">"minLng"</span> : rect.getBounds().getSouthWest( ).getLng(),</div><div class="line">                    <span class="string">"maxLng"</span> : rect.getBounds().getNorthEast( ).getLng(),</div><div class="line">                    <span class="string">"minLat"</span> : rect.getBounds().getSouthWest( ).getLat(),</div><div class="line">                    <span class="string">"maxLat"</span> : rect.getBounds().getNorthEast( ).getLat(),</div><div class="line">                    <span class="string">"cLng"</span> : rect.getBounds().getCenter( ).getLng(),</div><div class="line">                    <span class="string">"cLat"</span> : rect.getBounds().getCenter( ).getLat()</div><div class="line"></div><div class="line">        &#125;;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">if</span>(confirm(<span class="string">"are you sure to submit?"</span>))</div><div class="line">                &#123;</div><div class="line">                        $.post(&#123;</div><div class="line">                            <span class="attr">url</span> : <span class="string">"&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;"</span>,</div><div class="line">                            <span class="attr">data</span>: <span class="built_in">JSON</span>.stringify(data),</div><div class="line">                            <span class="attr">contentType</span>: <span class="string">'application/json;charset=UTF-8'</span>,</div><div class="line">                            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">                              top.location.href = <span class="string">"&#123;&#123; url_for('main.NEWPAGE2', username = current_user.username) &#125;&#125;"</span>;                              </div><div class="line">                            &#125;,</div><div class="line">                            <span class="attr">async</span>:<span class="literal">false</span></div><div class="line">                        &#125;);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                         mouseTool.close(<span class="literal">true</span>);</div><div class="line">                &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
 <li>实现的功能详见代码内注释的文档，其他明细可详询<a href="http://lbs.amap.com/api/javascript-api/guide/create-map/show-map/" target="_blank" rel="external">官方文档</a></li>
 <li>官方的实例中心内有详实的案例供参考引用</li>
@@ -606,7 +755,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/04/best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api/" data-id="cj0grn4y8000c24sqtz7t972f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/04/best-pracetice-of-GIS-coding-in-front-end-with-AMAP-api/" data-id="cj38qu4y4001l0usqqvowznyj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -774,7 +923,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/" data-id="cj0grn4z3001924sqb3f88nlv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/02/04/best-practice-of-flask-dev-during-Dec-16/" data-id="cj38qu4xc000y0usq825lnj7o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -924,7 +1073,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/FSENdzwxy/" data-id="cj0grn4zo001o24sqy6mvrcon" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/FSENdzwxy/" data-id="cj38qu4w400070usq9m6rpf3b" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1088,7 +1237,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/jan24collision/" data-id="cj0grn4ym000x24sqx9x20w19" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/jan24collision/" data-id="cj38qu4x7000p0usqkf6g0n92" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1229,7 +1378,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/" data-id="cj0grn4z4001b24sqwztqk2qj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/30/single-page-tool-kit-by-vue/" data-id="cj38qu4xi001f0usq7yq6elps" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1376,7 +1525,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="cj0grn4yb000e24sq9vap6jdg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/28/hightempsuperconductor/" data-id="cj38qu4xb000w0usq10bdq1qb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1540,7 +1689,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="cj0grn4yh000i24sqwdgz8jgb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="cj38qu4x3000l0usq8rxgyf35" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1618,159 +1767,6 @@
 
 
 
-    <article id="post-prototype" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/01/18/prototype/">prototype</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/01/18/prototype/">
-            <time datetime="2017-01-17T17:24:22.000Z" itemprop="datePublished">2017-01-18</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/misc/">misc</a>
-    </div>
-
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>开博客的初衷是记录，分享。<br>记录工作、生活，或者不知不觉生活和工作已经交织在一起自己没法分辨了。</p>
-<p><a href="http://spike774.github.io/" target="_blank" rel="external">博客</a>的内容主要分成两个部分：<br>生活，工程。</p>
-<h3 id="Daily-life"><a href="#Daily-life" class="headerlink" title="Daily life"></a>Daily life</h3><hr>
-<p>生活里会包含一些琐碎的日常，读过的书，也要把丢掉比较久的天文相关的时间填充进来。</p>
-<h3 id="Engineering"><a href="#Engineering" class="headerlink" title="Engineering"></a>Engineering</h3><hr>
-<p>其中工程又将拆分为光伏工程和软件工程，其中的子类目会在之后发布的文章中慢慢增补。</p>
-<h4 id="Photovoltiac-Engineering-PV-solar"><a href="#Photovoltiac-Engineering-PV-solar" class="headerlink" title="Photovoltiac Engineering/ PV/ solar"></a>Photovoltiac Engineering/ PV/ solar</h4><p>光伏工程中主要分享个人精通的系统设计，发电量模拟和气象，也顺带说一些新能源经济性的问题。</p>
-<h4 id="Software-Engineering"><a href="#Software-Engineering" class="headerlink" title="Software Engineering"></a>Software Engineering</h4><p>软件工程就主要记录编程时遇到的问题以及如何解决，更多的作为备忘录使用。虽然学过java的mooc但是实操中仍然是使用python的经验最多，实现过一些tool kit和一个图像识别程序。<br>早年学过一点javascript, 最近又由于工作需要学习了些许全栈的知识，基于flask写了一个网站，前端配合高德地图api实现了一些小功能，并且已经部署在aws ec2上。<br>数据库为sqlite.<br>工作环境为ubuntu 16 + win10 WSL (windows subsystem linux, dist - unbuntu 14), 大部分时间在win10 + WSL环境进行编程和调试。发布之后部署在unbuntu中。<br>我相信之后的文章中会涉及很多WSL问题，也期待微软的工程师完善WSL，现阶段在network部分的调用未完善导致部分nodejs的功能报错。</p>
-<p>后端python - flask大抵已经定调，前端在之前的应用中多用flask自带的jinja2，在传参的时候也尝试了angularjs的ajax传json，在同学的推荐下有幸了解了vuejs的始末。<br>打算之后往vuejs方向发展，以做app的方式学习推进。</p>
-<h3 id="todos"><a href="#todos" class="headerlink" title="todos:"></a>todos:</h3><hr>
-<ul>
-<li><del>搬运如果在冥王星上建光伏的长文 post during the event of new horizon fly-by pluto</del></li>
-<li><del>archive the tips and ajax post problem during web development with flask</del></li>
-<li><del>archive best practice of gis coding in web front with Amap api, trouble shooting</del></li>
-<li><del>learn vuejs to deploy a h5 mobile app with 2 main functions: roof around me, solar tool kit to generate reports</del></li>
-<li><del>archive some rasp pi 2  related practice, linux learning tips</del></li>
-<li><del>computer vision practice by opencv</del></li>
-<li>PV meteo and system design tips</li>
-</ul>
-<h3 id="read-and-think"><a href="#read-and-think" class="headerlink" title="read and think:"></a>read and think:</h3><hr>
-<ul>
-<li><del>the autobiography of Benjamin Franklin</del></li>
-<li><del>web development by flask</del></li>
-<li><del>angularjs即学即用</del></li>
-<li><del>hand book of powershell 3.0</del></li>
-<li><del>http权威指南</del></li>
-</ul>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="cj0grn4yn000z24sq04810kfl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://yoursite.com/2017/01/18/prototype/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/01/18/prototype/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
     </nav>
@@ -1783,6 +1779,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/28/PV-system-design-introduction/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ecmweb.com/site-files/ecmweb.com/files/uploads/2016/06/nec-code-basics-june-2016-pr.jpg)" alt="PV system design introduction/光伏系统设计简介" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/PV/">PV</a></p>
+                            <p class="item-title"><a href="/2017/05/28/PV-system-design-introduction/" class="title">PV system design introduction/光伏系统设计简介</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T13:30:50.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1860,25 +1875,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/03/03/Flask-Web-Development-Developing-Web-Applications-with-Python/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/51GsbpQfn2L.jpg)" alt="Flask Web Development:Developing Web Applications with Python/Flask Web开发:基于Python的Web应用开发实战" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
-                            <p class="item-title"><a href="/2017/03/03/Flask-Web-Development-Developing-Web-Applications-with-Python/" class="title">Flask Web Development:Developing Web Applications with Python/Flask Web开发:基于Python的Web应用开发实战</a></p>
-                            <p class="item-date"><time datetime="2017-03-03T15:10:33.000Z" itemprop="datePublished">2017-03-03</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1888,7 +1884,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">10</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -1897,7 +1893,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
         </div>
     </div>
 
@@ -1906,7 +1902,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aeronautics/">aeronautics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/godaddy/">godaddy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-map-api/">google map api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aeronautics/">aeronautics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/godaddy/">godaddy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-map-api/">google map api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1915,7 +1911,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 10px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 16.67px;">WSL</a> <a href="/tags/aeronautics/" style="font-size: 10px;">aeronautics</a> <a href="/tags/amap-api/" style="font-size: 13.33px;">amap api</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 16.67px;">flask</a> <a href="/tags/godaddy/" style="font-size: 10px;">godaddy</a> <a href="/tags/google-map-api/" style="font-size: 10px;">google map api</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
+            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 13.33px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 16.67px;">WSL</a> <a href="/tags/aeronautics/" style="font-size: 10px;">aeronautics</a> <a href="/tags/amap-api/" style="font-size: 13.33px;">amap api</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 16.67px;">flask</a> <a href="/tags/godaddy/" style="font-size: 10px;">godaddy</a> <a href="/tags/google-map-api/" style="font-size: 10px;">google map api</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
         </div>
     </div>
 

@@ -3,32 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>PV plant on Pluto(冥王星上的光伏电站) | we do sacrifice.</title>
+    <title>PV system design introduction/光伏系统设计简介 | we do sacrifice.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="original post on Jul 17th 2015
-首先恭祝NASA的新视野号探测器(new horizons probe)顺利飞掠冥王星进行近距离探测，成功获取冥王星高清图片并继续前往柯伊伯带。至此，人类的探测器对曾经的九大行星都完成了近距离探测，并获取了清晰的图片。
-那么，科学家们也兴高采烈地拿到了一手的测绘数据，再结合之前的光谱分析，得出以下结论：
-
-也就意味着，其表面是固态氮！">
+    <meta name="description" content="前序写了很多读书的内容和近期在忙的编程相关的事情，那么趁近期节奏稍微能放慢一点的时候来填一下坑。
+先介绍下背景，从2014年转行做光伏项目以来，直接参与到美国光伏项目的设计中，follow NEC 690进行设计，后2015年辗转开始做国内的项目。其中北美的项目经历大多是分布式项目，但是北美对分布式的定义主要从容量出发，小于5MW的基本都称之为分布式项目，无论是建在屋顶还是地面上。刚开始接触国内项">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PV plant on Pluto(冥王星上的光伏电站)">
-<meta property="og:url" content="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/index.html">
+<meta property="og:title" content="PV system design introduction/光伏系统设计简介">
+<meta property="og:url" content="http://yoursite.com/2017/05/28/PV-system-design-introduction/index.html">
 <meta property="og:site_name" content="we do sacrifice.">
-<meta property="og:description" content="original post on Jul 17th 2015
-首先恭祝NASA的新视野号探测器(new horizons probe)顺利飞掠冥王星进行近距离探测，成功获取冥王星高清图片并继续前往柯伊伯带。至此，人类的探测器对曾经的九大行星都完成了近距离探测，并获取了清晰的图片。
-那么，科学家们也兴高采烈地拿到了一手的测绘数据，再结合之前的光谱分析，得出以下结论：
-
-也就意味着，其表面是固态氮！">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/New_Horizons_-_Logo2_big.png/243px-New_Horizons_-_Logo2_big.png">
-<meta property="og:updated_time" content="2017-01-29T17:20:24.006Z">
+<meta property="og:description" content="前序写了很多读书的内容和近期在忙的编程相关的事情，那么趁近期节奏稍微能放慢一点的时候来填一下坑。
+先介绍下背景，从2014年转行做光伏项目以来，直接参与到美国光伏项目的设计中，follow NEC 690进行设计，后2015年辗转开始做国内的项目。其中北美的项目经历大多是分布式项目，但是北美对分布式的定义主要从容量出发，小于5MW的基本都称之为分布式项目，无论是建在屋顶还是地面上。刚开始接触国内项">
+<meta property="og:image" content="http://ecmweb.com/site-files/ecmweb.com/files/uploads/2016/06/nec-code-basics-june-2016-pr.jpg">
+<meta property="og:updated_time" content="2017-05-28T13:30:50.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PV plant on Pluto(冥王星上的光伏电站)">
-<meta name="twitter:description" content="original post on Jul 17th 2015
-首先恭祝NASA的新视野号探测器(new horizons probe)顺利飞掠冥王星进行近距离探测，成功获取冥王星高清图片并继续前往柯伊伯带。至此，人类的探测器对曾经的九大行星都完成了近距离探测，并获取了清晰的图片。
-那么，科学家们也兴高采烈地拿到了一手的测绘数据，再结合之前的光谱分析，得出以下结论：
-
-也就意味着，其表面是固态氮！">
-<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/New_Horizons_-_Logo2_big.png/243px-New_Horizons_-_Logo2_big.png">
+<meta name="twitter:title" content="PV system design introduction/光伏系统设计简介">
+<meta name="twitter:description" content="前序写了很多读书的内容和近期在忙的编程相关的事情，那么趁近期节奏稍微能放慢一点的时候来填一下坑。
+先介绍下背景，从2014年转行做光伏项目以来，直接参与到美国光伏项目的设计中，follow NEC 690进行设计，后2015年辗转开始做国内的项目。其中北美的项目经历大多是分布式项目，但是北美对分布式的定义主要从容量出发，小于5MW的基本都称之为分布式项目，无论是建在屋顶还是地面上。刚开始接触国内项">
+<meta name="twitter:image" content="http://ecmweb.com/site-files/ecmweb.com/files/uploads/2016/06/nec-code-basics-june-2016-pr.jpg">
     
 
     
@@ -217,7 +208,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-PV-plant-on-Pluto" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-PV-system-design-introduction" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -225,7 +216,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            PV plant on Pluto(冥王星上的光伏电站)
+            PV system design introduction/光伏系统设计简介
         </h1>
     
 
@@ -234,8 +225,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/01/19/PV-plant-on-Pluto/">
-            <time datetime="2017-01-19T10:09:11.000Z" itemprop="datePublished">2017-01-19</time>
+        <a href="/2017/05/28/PV-system-design-introduction/">
+            <time datetime="2017-05-28T13:30:50.000Z" itemprop="datePublished">2017-05-28</time>
         </a>
     </div>
 
@@ -249,7 +240,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Astro/">Astro</a>, <a class="tag-link" href="/tags/PV/">PV</a>
+        <a class="tag-link" href="/tags/PV/">PV</a>
     </div>
 
                     </div>
@@ -260,39 +251,48 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>original post on Jul 17th 2015</p>
-<p>首先恭祝NASA的新视野号探测器(new horizons probe)顺利飞掠冥王星进行近距离探测，成功获取冥王星高清图片并继续前往柯伊伯带。至此，人类的探测器对曾经的九大行星都完成了近距离探测，并获取了清晰的图片。</p>
-<p>那么，科学家们也兴高采烈地拿到了一手的测绘数据，再结合之前的光谱分析，得出以下结论：</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Internal_Structure_of_Pluto.jpg/297px-Internal_Structure_of_Pluto.jpg" alt="Pluto structure"></p>
-<p>也就意味着，其表面是固态氮！</p>
-<p><a href="https://en.wikipedia.org/wiki/Nitrogen" target="_blank" rel="external">氮</a>也是工业常用的制冷剂，ASHRAE编号<a href="https://en.wikipedia.org/wiki/List_of_refrigerants" target="_blank" rel="external">R-728</a>，其凝固点为63.15 K ​(−210.00 °C)，所以冥王星的表面温度算是低的令人发指。如果想在其表面布置钢结构支架，那么我能想到的至少也是在LNG行业里常见的殷瓦钢，其特点是镍含量高，低温抗形变能力强，如果是普通金属结构放上去，碰一下就脆裂应该不是问题。但是殷瓦钢也不是没有缺点，其焊接较困难，防腐能力差，据说被沾染手上油脂的<a href="https://en.wikipedia.org/wiki/Invar" target="_blank" rel="external">殷瓦钢</a>在几天之内出现明显<br>腐蚀[1]。仅此一点就基本断绝了在冥王星表面上建造光伏阵列的可能。</p>
-<p><img src="http://what-if.xkcd.com/imgs/a/13/laser_pointer_more_power.png" alt="老师能不能再给力一点!" title="geili"></p>
-<p>人类感染了一种病毒，对可再生能源产生了不可抑制的狂热，并且在航天科技的科技树上多点了些天赋，发射分布式自构架的机器人[2]，3D打印机，再推进几颗铁硅镍铝锌铜含量较高的小行星在冥王星表面定向坠毁[3]，终于不计成本地在其表面搭起了支架。并且所有器件都能在极低的环境温度下可靠地运行。</p>
-<p>那么我们开始算算组串的情况吧，假设选用<a href="http://www.trinasolar.com/HtmlData/downloads/cn/products/TSM_PC05A_CN.pdf" target="_blank" rel="external">Trina PC05A 260W</a>组件在-210°C时的开路电压为66.93V，那么对于1000V的系统，每串14个组件，不能再多。对于一般最多可以接8串的组串式逆变器，满载也只有约29.12 kW的DC功率，如果超配比例为1.2，那么24 kW的逆变器比较合适，但是电气杂件数量的增多，会将电气物料的数量拉升至600V系统时的高位，但是由于极低的环境温度，导体的电导率极低，接近超导，所以需要的线径也相应小了很多，可能再也见不到粗壮的线缆了，压降极低，且超导储能也具备实现的条件。那么一个离网电站也并没有什么问题，再加上日益发展的<a href="http://www.mhi-global.com/news/story/1503121879.html" target="_blank" rel="external">远距离微波输电技术</a>，把冥王星上的电力传输到地球也不是遥不可及的事情，冥王星为椭圆轨道，最长焦点距离距约为49AU，最短焦点距离约为30AU，所以其离地球最近的时候约29AU，最远约51AU，那么新鲜的冥王星电力到达地球大约需要232~408 min即4~7小时。考虑到冥王星的自转，其表面不会一直朝向地球，需要再冥王星轨道发射几颗同步卫星中继微波传输。</p>
-<p>其辐照情况则更为悲观，地球与冥王星的直径相对于太阳直径可以忽略不计，由球体面积公式可知面积是半径的平方关系，那么冥王星（此时取其绕日轨道半径为40AU，又由维基查得其半径为0.18地球半径）所能接收到的辐照量是地球的(1/40)^2*0.18 ~= 0.000113，由此可见如此感人的辐照数据也并没有消磨到人类对可再生能源的欲望。</p>
-<p><img src="http://what-if.xkcd.com/imgs/a/13/laser_pointer_more_power.png" alt="老师能不能再给力一点!" title="geili"></p>
-<p>既然人类已经有了“登陆”冥王星的能力，那我们可以就这样的科技树做一些更有趣的事情。</p>
-<p>关于登陆冥王星为什么那么难:<br><a href="http://v.qq.com/boke/page/k/0/d/k01598w3bod.html" target="_blank" rel="external">Pluto in a minute</a><br>如果携带减速需要的燃料可能需要30年！<a href="http://www.quora.com/Why-is-New-Horizons-not-designed-to-land-on-Pluto" target="_blank" rel="external">Harsha在Quora的回答</a>。</p>
-<p>在现有的运载火箭能力上进行推演。人类进行星际(interplanetary)探索的比较现实的方案是在太空中建立中继站，其中月球与月地L4, L5点(<a href="https://en.wikipedia.org/wiki/Lagrangian_point" target="_blank" rel="external">拉格朗日点</a>)甚至太空电梯[4]都是比较合适的选择。</p>
-<h4 id="太空电梯计划："><a href="#太空电梯计划：" class="headerlink" title="太空电梯计划："></a>太空电梯计划：</h4><p>由空间站(ISS，天宫等)衍生，但是需要其维持在地球同步或者赤道平面轨道，向地面发射强度极佳的电缆。由电缆切割地球磁感线产生的电力作为初始能源，该电缆也可以用作输电。其中大刘的硬科幻<a href="http://www.amazon.cn/%E4%B8%89%E4%BD%93-%E5%88%98%E6%85%88%E6%AC%A3/dp/B0012ZZ1W4/ref=sr_1_2?ie=UTF8&amp;qid=1437151143&amp;sr=8-2&amp;keywords=%E4%B8%89%E4%BD%93" target="_blank" rel="external">三体1:地球往事</a>情节中，”古筝”计划所使用的纳米级高强度材料就可能成为空天电缆的主要材料。然后顺延电缆构建传道结构，打通相对廉价的升空通道，再进行环状结构物构建，在人工环的外围预留环地球粒子加速器，加速器外围敷设组件，既可以收集太阳光，又可以初步阻挡射向环状结构的空间辐射。<br>通过轨道电梯输送部分核心设备、原材料与3D打印机，初期设备部署完成后只需来料加工，在无重力环境可以加工出更好的半导体材料，大幅提升电池片以及逆变器元器件的性能。</p>
-<h4 id="月球基地计划："><a href="#月球基地计划：" class="headerlink" title="月球基地计划："></a>月球基地计划：</h4><p>发射部分核心设备、部分原材料与3D打印机到地球轨道，发射人员到地球轨道，各航天器在地球轨道对接，推进至月球，登陆，建造月面基地[5]。由于月面具有大量的硅资源，重力只有地球的1/6，也可以视为一个优秀的低重力加工区域。由于月球被地球引力潮汐锁定，只用在其朝向地球的一面设置微波传输阵列即可，可以不使用中继卫星。</p>
-<h4 id="拉格朗日点计划："><a href="#拉格朗日点计划：" class="headerlink" title="拉格朗日点计划："></a>拉格朗日点计划：</h4><p>该计划的核心来自于NASA的小行星捕获计划[3]，现在也可以通过KSP(<a href="http://store.steampowered.com/app/220200/" target="_blank" rel="external">Kerbal Space Program</a>)进行模拟，游戏的同时为NASA提供参考数据。<br>拉格朗日点相当于引力盲区，而L4, L5的稳定性最佳，把各种资源丰富的小行星牵引去之后，在其表面建立加工中心，也是优秀的无重力生产区，其微波输电配置（朝向地球）也相对简单。</p>
-<p><img src="http://what-if.xkcd.com/imgs/a/13/laser_pointer_more_power.png" alt="老师能不能再给力一点!" title="geili"></p>
-<p>那我们来做个<a href="https://zh.wikipedia.org/wiki/%E6%88%B4%E6%A3%AE%E7%90%83" target="_blank" rel="external">戴森球</a>吧！恒星级能量不是梦</p>
-<p><img src="http://what-if.xkcd.com/imgs/a/13/laser_pointer_more_power.png" alt="老师能不能再给力一点!" title="geili"></p>
-<p>大概54亿年之后，太阳会离开主序星的序列，开始膨胀变成红巨星，届时其膨胀半径将达到2AU[6]。没错，此时地球早已被烧干吞没。人类如果（必须）掌握了星际旅行的能力，那么终于可以在冥王星上<del>戏水</del>生活了，无时差使用当地的光伏电站了！</p>
-<p>——————————我是分割线————————-</p>
-<h4 id="最后冷知识一枚："><a href="#最后冷知识一枚：" class="headerlink" title="最后冷知识一枚："></a>最后冷知识一枚：</h4><p>国际空间站(ISS)的US区块有8组光伏阵列，每组阵列面积约为375m2，160 V to 124 V DC系统，装有32800个双面太阳能电池片(bifacial solar cell - 该类型组件适应低温环境工况，且可以同时接受太阳辐照与地球反射辐照)[7]，阵列初始容量约为31kW，15年后衰减为26kW，电池片效率约为14%，阵列完工时间为Mar 2009, 任务编号STS-119[8]。</p>
-<h4 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h4><ol>
-<li>沪东中华的传闻</li>
-<li>《<a href="http://www.amazon.cn/%E5%A4%B1%E6%8E%A7-%E5%85%A8%E4%BA%BA%E7%B1%BB%E7%9A%84%E6%9C%80%E7%BB%88%E5%91%BD%E8%BF%90%E5%92%8C%E7%BB%93%E5%B1%80-%E5%87%AF%E6%96%87%E2%80%A2%E5%87%AF%E5%88%A9/dp/B004FPIHG0/ref=tmm_pap_title_0?ie=UTF8&amp;qid=1437150402&amp;sr=8-2" target="_blank" rel="external">失控</a>》第三章，3.5 利用现实世界的反馈实现交流</li>
-<li><a href="http://www.nasa.gov/mission_pages/asteroids/initiative/index.html#.VQ51zPmUc50" target="_blank" rel="external">NASA小行星捕获计划 </a></li>
-<li>类似<a href="https://en.wikipedia.org/wiki/Mobile_Suit_Gundam_00" target="_blank" rel="external">高达OO</a>世界观里的太空电梯，但是初期结构可能更为简单，但是此时太空电梯的电力会成为主要能源供给</li>
-<li>类似<a href="https://zh.wikipedia.org/wiki/%E5%AE%87%E5%AE%99%E5%85%84%E5%BC%9F" target="_blank" rel="external">宇宙兄弟</a>世界观里的登月计划，且月面基地需要埋地以阻隔空间辐射</li>
-<li>恒星发展一般参照<a href="https://en.wikipedia.org/wiki/Hertzsprung%E2%80%93Russell_diagram" target="_blank" rel="external">赫罗图</a>，<a href="https://en.wikipedia.org/wiki/Sun" target="_blank" rel="external">太阳</a>的具体数据参照来自维基</li>
-<li><a href="https://en.wikipedia.org/wiki/International_Space_Station" target="_blank" rel="external">ISS-wiki</a></li>
-<li>:<a href="http://www.nasa.gov/sites/default/files/atoms/files/np-2015-05-022-jsc_iss_utilization_guide_2015-508c.pdf" target="_blank" rel="external">Reference guide to the International Space Station</a> - P50, 84</li>
-</ol>
+            <p>前序写了很多读书的内容和近期在忙的编程相关的事情，那么趁近期节奏稍微能放慢一点的时候来填一下坑。</p>
+<p>先介绍下背景，从2014年转行做光伏项目以来，直接参与到美国光伏项目的设计中，follow NEC 690进行设计，后2015年辗转开始做国内的项目。<br>其中北美的项目经历大多是分布式项目，但是北美对分布式的定义主要从容量出发，小于5MW的基本都称之为分布式项目，无论是建在屋顶还是地面上。<br>刚开始接触国内项目的时候地面与屋顶皆有，随着标杆补贴从15年至17年的3连跳，地面项目几乎很难展开，当然利好的就是我比较擅长的分布式项目开始广泛推广。</p>
+<p>总体而言，分布式项目更匹配光伏项目的性质，本质上是能源就近发生，就近使用，避免了电能传输过程中无法避免的线损浪费。<br>于此同时，所谓分布式就是去中心化，在发生极端事件的情况下仍能够维持局部地区的电力供给。</p>
+<p>言归正传，由于亲自参与过中美的光伏系统设计，因此也深知当前国内电气GB基本是随IEC的规范，但是在光伏设计上的规范，仍未推出正式稿。<br>国内光伏系统设计主要跟随GB50797-2012草稿。虽然有不完善的地方，但是也算是为国内光伏系统的标准化开了路。</p>
+<h5 id="光伏设计的主要内容"><a href="#光伏设计的主要内容" class="headerlink" title="光伏设计的主要内容"></a>光伏设计的主要内容</h5><ul>
+<li><p>土建<br>对于地面电站很重要，主要涉及场平即国内的三通一平或者四通一平。对于光伏车棚主要是明确地下的市政管道和电缆沟等现有状况。对于屋顶电站则是屋面现状。</p>
+</li>
+<li><p>结构<br>该部分主要涉及光伏系统支架的选型和布置。无论是地面还是屋顶项目都至少要附带一份结构计算书来声明结构的可行性。<br>组件排布除了考虑支架本身的属性之外还要考虑消防因素。</p>
+</li>
+<li><p>电气<br>电气部分的内容应该是最多的，从组件到并网关口表，所有电缆串起来的部分都相关。<br>组件电气设备排布也要考虑消防、防雷等因素。无论是我国还是美国在大型电站中都要考虑二次设备的设计。</p>
+</li>
+</ul>
+<h5 id="土建"><a href="#土建" class="headerlink" title="土建"></a>土建</h5><p>地面项目的土质直接影响了支架的选型，主要是桩的选型。现在市面上常用的有现浇混凝土桩，螺旋桩。从成本和安装效率上会优先选择使用螺旋桩。<br>最近流行的农光，渔光和水上漂浮电站的差异主要也体现在桩基上。其中农光只是单纯的要求架高，渔光对水下的部分有要求，而且施工的成本会增加很多，水上漂浮电站把现有的桩基换为浮筒。</p>
+<p><a href="https://websoilsurvey.sc.egov.usda.gov/App/HomePage.htm" target="_blank" rel="external">Web Soil Survey</a>提供美国大部分地区的土质查询，在中国有见到类似的国土资源服务，<a href="http://www.ngac.org.cn/Distribute/List" target="_blank" rel="external">国家地质资料数据中心</a>，其中可以查到比较粗糙的地址数据。</p>
+<p>在此也想多谈一些关于风光，农光和渔光项目的看法。</p>
+<p>最早是在2015年的时候听到所谓风光互补的概念，在同一个地区希望风电和光伏一起开发。风电和光伏都是出力不稳定的可再生能源，一个依赖风速，一个依赖辐照，而且无法调控，在不配置储能装置的应用场景中，二者相对独立，没有关联，并联之后也不会对电网的稳定性作出改善。而且会共同占用输电配额，并不是一种可落地的构架。</p>
+<p>后续跟进的则是农光互补，这里所谓的互补主要是土地复用，说到底就是为了以农光的方式获取农业用地做光伏。众所周知地面光伏项目要通过国土局的审批，但是我国的耕地红线是万万不可以触碰的。笔者考察过的农光项目大多是为了获取土地建光伏，至于光伏支架下边种的什么农作物，倒是没人能说的清楚。抛开这些假农光，也有见识到真农光，在农业大棚的南面安装光伏组件，棚内种植喜阴的农作物，例如菌类或者木耳，但是这种真农光项目由于项目成本稍高，非常少见。</p>
+<p>在2016年末渔光互补也跟着水上光伏电站一起冒了出来，水上漂浮电站一般建设在水库中，渔光互补则是架设在水深小于1.5m的池塘里，养鱼发电两不误。这种电站的产生本质上来讲还是由于土地难以获取，地面光伏电站被逼无奈往水上转移。另外所以的水上电站都无法回避严重的PID (potential induced degradation),在高温高湿的环境中，组件衰减往往出人预料。2016年的时候听闻有一批使用阿特斯组件的渔光电站，1年后平均衰减了25%，严重的衰减高达30%。主要是由于高温高湿的情况下玻璃中的钠离子与硅电池片反应导致电池效率降低。因此也有一说使用IP等级更高的双玻组件可以避免这种状况。其中防PID设计，也就是电站边框接地系统设计也多少与此相关，这些之后放在电气设计里详解。</p>
+<p>总之这些互补名号的项目大多是打着其他旗号解决土地问题，随着地面电站的逐年紧缩，限电，竞价上网，领跑者等一步步的落实，这些终将迅速没落下去。 </p>
+<h5 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h5><p>对于地面项目来说这部分主要是桩基以上的结构物，绝大部分用的是冷弯薄壁的型钢，也常用价格稍贵但是重量较轻的铝合金材质的型材。再使用压块作为紧固件把组件固定在支架上。</p>
+<p>对于屋顶项目，如何把支架固定在屋顶上属于结构专业的范畴，究其根本就是屋顶的承重要单独计算是否满足，而不是像地面项目不用考虑承重问题，只用根据土质选择对应的桩基即可。</p>
+<p>常见的做光伏项目的屋顶可以分为彩钢瓦屋顶和混凝土屋顶，还有在户用项目中常见的瓦面斜屋顶三种解决方案。其中混凝土平屋顶的做法与地面相似，是在屋顶放置现浇混凝土块，利用压块自重固定上部支架系统。斜屋顶的安装方式则常用紧固件把支架与屋面结构进行刚性连接，在某种程度上可以视为BAPV的做法。</p>
+<p>混凝土屋面的富裕载荷要求一般为50kgf/m2, 如果支架需要抬高，那么需要的承载力最高可能会上升至80~100kgf/m2，具体数值需结构工程师根据当地的风载雪载进行精细计算。由于我国建筑规范规定上人屋面的荷载要求为0.2kN/m2(~= 200kfg/m2), 因此一般上人屋面是完全可以承受光伏的荷载。非上人混凝土屋面的设计要求一般为0.05kN/m2, 因此在非上人屋面上实施支架架高方案还需谨慎处理。</p>
+<p>斜屋面的富裕载荷要求一般为20kgf/m2, 由于屋面上会预留运维通道和检修通道，所以一般不会满铺，因此荷载的最小要求为15kgf/m2. 固定方式一般是使用夹具夹住彩钢瓦的角驰部位，另一端螺栓连接导轨，导轨上有卷边C型槽位用来安装夹具固定组件。这种安装方式不打孔、不穿刺，不破坏屋顶现有的防水结构，因此对安装的瓦型就有了一定的要求。现在市面上的绝大部分压型钢板都是适用的，例如角驰型、直立卷边型，但是铆接固定的梯形瓦就不太适用。梯形瓦表面没有可以供夹具的紧固的位置，因此安装的时候必须打孔或者适用强力胶粘结，前者会引起后续防水上的争议，后者强度上势必不如紧固件连接，而且彩钢瓦的使用寿命一般为15年，牵扯到换瓦的问题处理起来也会非常麻烦。</p>
+<p>户用斜瓦房的荷载要求与彩钢瓦一致，只不过导轨与屋面的连接件换成了一种Z型的支架，一端固定在瓦下的梁上，主体沿瓦片间的缝隙穿出并抬起。总的来说并不会影响现有屋面防水。</p>
+<p>最近遇到一个比较特殊的项目，使用的是TPO防水材料，这种有机聚合物防水材料敷设在屋顶可以有效地防水保温隔热，现阶段多用于对车间环境有控制要求的企业，外企居多，而且大多在汽车行业。在处理这种屋顶时只能对屋顶进行穿孔而且在紧固件与TPO防水接触的区域需要焊接作业，这些工作都必须由TPO供应商完成才能规避防水质保的纠纷风险。</p>
+<h5 id="电气"><a href="#电气" class="headerlink" title="电气"></a>电气</h5><p>电气是光伏工程中工作量最多的部分，一次二次均有涉及，其中同时存在直流和交流电气系统。涉及到不同电压等级以及并网相关事宜，而且系统设计选型中的主要参数计算都集中在电气系统部分。</p>
+<p>从物理上的连接顺序是，组件 - 直流线缆 (- DC汇流箱) (- 直流柜) - 逆变器 (- AC汇流箱) - 计量表 - 主断路器 - 并网点</p>
+<p>现在国内市场上的主流组件是多晶60片组件，功率段已经上升到265W - 270W，如果按照此功率换算为72片电池片的组件，那么功率段为315~320W.个人印象在2015年初SunEdison已经实现了320W组件的量产。</p>
+<p>现在市场是多晶 &gt; 单晶 &gt; 其他，其他中比较亮眼的是First solar的碲化镉组件，虽然国内有杭州龙炎在生产该工艺的组件，但是利星行现在已经开始操作First solar碲化镉组件的进口，并且贴牌Caterpillar(CAT).</p>
+<p>当下国内工商业项目中的主流仍然是多晶组件，在领跑者项目中由于效率门槛猛推了一次单晶组件，但是仍然没有完全拉下单晶的造价。</p>
+<p>言归正传，组件的主要参数是STC功率(STC为标准测试环境，电池片温度为25℃，辐照强度为1000 W/m2)，系统电压1000V, 开路电压(Voc), 短路电流(Isc), 开路电压温升系数(temp-eff of Voc)来计算最大组串数。当前市场上也在推广1500V系统，当前已经有组件，线缆和逆变器通过测试认证，但是支架以及其他相关的零件的测试和认证方法仍待完善。</p>
+<p>直流侧使用的线缆一般都是光伏专用线缆，美标线规体系中常用PV wire 2kV, 国标线规起初没有专门的标准，在大型地面项目中也会使用YJV20/22-1kV的铠装电缆连接直流汇流箱与逆变器。随着国内光伏项目的日益增对，国标线规直接沿用欧标过TUV认证的PV1f线缆。</p>
+<p>直流汇流箱是集中式逆变器的必备器件，但是组串式逆变器并不需要该设备。直流汇流箱也是整个电站中最易发生事故的设备，经常出现的事故是火灾，由于是在直流系统中，所以随着光伏系统出力的变化可能会出现拉弧。相应地在美国NEC2014标准中已经要求新建的电站使用带防拉弧装置的汇流箱，在国内虽然没有硬性要求，但是在预算允许的情况下尽量使用AFCI (arc fault circuit interrupter, 防拉弧)汇流箱，以防万一。随着</p>
+<p>其中汇流箱的另一个易损件是其中的直流断路器，涉及到采购阶段甚至会出于价格的原因选择较为便宜的杂牌断路器来替代正牌断路器。</p>
+<p>直流柜也是只有使用集中式逆变器时才会使用到的设备，把汇流箱的出线汇集之后集中进线到逆变器。MPPT路数有限，理论上已经不是十分适用于工商业项目的复杂屋顶环境。</p>
+<p>逆变器是光伏系统中除了组件最为重要的设备了，主要用于把光伏组件发出的直流电转换为一般工况中常用的交流电，可以视为电压稳定的电流源。在上文中也有提到现在市场上常用的逆变器有两类，集中式逆变器和组串式逆变器，二者的主要差别在于MPPT路数，集中式逆变器一般为单MPPT，多用于大型地面电站，组串式逆变器拥有多路MPPT，常用于工商业项目。逆变器的工作原理是通过MPPT(最大功率点追踪算法)控制IGBT桥式开关把直流电调制为指定电压频率的交流电。因此对各路MPPT接入的组件一致性有所要求，组件功率一致性(STC功率以及阴影遮挡情况)越好则效率越高。一般而言地面电站可以统一规划朝向和间距因而比较容易控制一致性，从而多用价格较便宜的集中式逆变器，工商业屋顶为了应对复杂的朝向和阴影从而多用组串式逆变器。总体而言经过这两年的发展，我国逆变器价格已经屡屡破冰，为造价的下行贡献了不少的权重。</p>
+<p>交流汇流箱与一般的交流配电柜别无二致，完全匹配交流系统的电气性能参数，既可以用大厂的标准件，也可以按需自备匹配整定电流的母排和用于室内外不同防护等级的箱体。</p>
+<p>计量表顾名思义是用来计量电能的装置，全额上网的项目只需要一块表来计量上网的电量，自发自用项目除了一块用于计量光伏系统出力的电表外还会把现有的下行计量表替换为双向电表，计量余电上网的容量以便于结算售电收益。这里需要强调的是为了获取电网代发的补贴，这里必须使用国家电网提供和标定的电表。</p>
+<p>主断路器，是光伏系统物理并网点前的开关装置，400V及以下电压等级系统中使用一般交流断路器即可，在0.6kV及以上电压等级系统中此处需用继电保护装置以满足电网对二次系统的要求。一般在主断路器所在的配电箱内也会配备浪涌保护器以保护系统避免雷击引起的过载电流，这也是光伏系统常用的防雷措施。</p>
+<p>并网点即光伏系统与现有电网系统进行物理连接的部位，全额上网系统一般T接在就近的10kV架空线上，或者升压后拉专线连接到就近的35kV或者110kV变电站中。地面项目一般自建110kV, 220kV或者500kV的升压站，升压后输送到就近的变电站。自发自用项目一般连接在就近的配电柜或者变压器低压母排，若配电房有备用柜也可以直接连接到备用柜的断路器上。NEC 705对并网点使用的母排以及连接方式有明确的要求，在国内没有明确规范要求的状况下可以供参考。</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>随着光伏行业的发展，技术迭代，降本增效会衍生出各式各样的变体，但是上述三大件作为光伏系统的基本框架大概率在中长周期是不会有大的变动的，掌握了上述内容也有利于理解技术革新的要点。</p>
 
         
         </div>
@@ -303,7 +303,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/" data-id="cj38qu4x3000l0usq8rxgyf35" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/05/28/PV-system-design-introduction/" data-id="cj38qu4wp00090usqdtxjvqln" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -371,7 +371,7 @@
 
             
     
-        <a href="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/">评论</a>
+        <a href="http://yoursite.com/2017/05/28/PV-system-design-introduction/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/05/28/PV-system-design-introduction/">评论</a>
     
 
         </footer>
@@ -380,19 +380,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/01/28/hightempsuperconductor/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    高温超导技术与应用原理
-                
-            </div>
-        </a>
     
-    
-        <a href="/2017/01/18/prototype/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/03/19/the-time-machine/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">prototype</div>
+            <div class="article-nav-title">the time machine</div>
         </a>
     
 </nav>
@@ -406,7 +397,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="2017/01/19/PV-plant-on-Pluto/" data-title="PV plant on Pluto(冥王星上的光伏电站)" data-url="http://yoursite.com/2017/01/19/PV-plant-on-Pluto/"></div>
+    <div class="ds-thread" data-thread-key="2017/05/28/PV-system-design-introduction/" data-title="PV system design introduction/光伏系统设计简介" data-url="http://yoursite.com/2017/05/28/PV-system-design-introduction/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;

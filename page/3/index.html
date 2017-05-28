@@ -153,7 +153,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                21
+                22
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -200,6 +200,159 @@
 
             
             <section id="main">
+    <article id="post-prototype" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/01/18/prototype/">prototype</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/01/18/prototype/">
+            <time datetime="2017-01-17T17:24:22.000Z" itemprop="datePublished">2017-01-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/misc/">misc</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>开博客的初衷是记录，分享。<br>记录工作、生活，或者不知不觉生活和工作已经交织在一起自己没法分辨了。</p>
+<p><a href="http://spike774.github.io/" target="_blank" rel="external">博客</a>的内容主要分成两个部分：<br>生活，工程。</p>
+<h3 id="Daily-life"><a href="#Daily-life" class="headerlink" title="Daily life"></a>Daily life</h3><hr>
+<p>生活里会包含一些琐碎的日常，读过的书，也要把丢掉比较久的天文相关的时间填充进来。</p>
+<h3 id="Engineering"><a href="#Engineering" class="headerlink" title="Engineering"></a>Engineering</h3><hr>
+<p>其中工程又将拆分为光伏工程和软件工程，其中的子类目会在之后发布的文章中慢慢增补。</p>
+<h4 id="Photovoltiac-Engineering-PV-solar"><a href="#Photovoltiac-Engineering-PV-solar" class="headerlink" title="Photovoltiac Engineering/ PV/ solar"></a>Photovoltiac Engineering/ PV/ solar</h4><p>光伏工程中主要分享个人精通的系统设计，发电量模拟和气象，也顺带说一些新能源经济性的问题。</p>
+<h4 id="Software-Engineering"><a href="#Software-Engineering" class="headerlink" title="Software Engineering"></a>Software Engineering</h4><p>软件工程就主要记录编程时遇到的问题以及如何解决，更多的作为备忘录使用。虽然学过java的mooc但是实操中仍然是使用python的经验最多，实现过一些tool kit和一个图像识别程序。<br>早年学过一点javascript, 最近又由于工作需要学习了些许全栈的知识，基于flask写了一个网站，前端配合高德地图api实现了一些小功能，并且已经部署在aws ec2上。<br>数据库为sqlite.<br>工作环境为ubuntu 16 + win10 WSL (windows subsystem linux, dist - unbuntu 14), 大部分时间在win10 + WSL环境进行编程和调试。发布之后部署在unbuntu中。<br>我相信之后的文章中会涉及很多WSL问题，也期待微软的工程师完善WSL，现阶段在network部分的调用未完善导致部分nodejs的功能报错。</p>
+<p>后端python - flask大抵已经定调，前端在之前的应用中多用flask自带的jinja2，在传参的时候也尝试了angularjs的ajax传json，在同学的推荐下有幸了解了vuejs的始末。<br>打算之后往vuejs方向发展，以做app的方式学习推进。</p>
+<h3 id="todos"><a href="#todos" class="headerlink" title="todos:"></a>todos:</h3><hr>
+<ul>
+<li><del>搬运如果在冥王星上建光伏的长文 post during the event of new horizon fly-by pluto</del></li>
+<li><del>archive the tips and ajax post problem during web development with flask</del></li>
+<li><del>archive best practice of gis coding in web front with Amap api, trouble shooting</del></li>
+<li><del>learn vuejs to deploy a h5 mobile app with 2 main functions: roof around me, solar tool kit to generate reports</del></li>
+<li><del>archive some rasp pi 2  related practice, linux learning tips</del></li>
+<li><del>computer vision practice by opencv</del></li>
+<li>PV meteo and system design tips</li>
+</ul>
+<h3 id="read-and-think"><a href="#read-and-think" class="headerlink" title="read and think:"></a>read and think:</h3><hr>
+<ul>
+<li><del>the autobiography of Benjamin Franklin</del></li>
+<li><del>web development by flask</del></li>
+<li><del>angularjs即学即用</del></li>
+<li><del>hand book of powershell 3.0</del></li>
+<li><del>http权威指南</del></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/01/18/prototype/" data-id="cj38qu4xf00180usqnz9trohn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/01/18/prototype/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://yoursite.com/2017/01/18/prototype/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-origin" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -251,7 +404,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="cj0grn4yv001224sq42968iw1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/01/16/origin/" data-id="cj38qu4xh001c0usq9elud62c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -345,6 +498,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/05/28/PV-system-design-introduction/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ecmweb.com/site-files/ecmweb.com/files/uploads/2016/06/nec-code-basics-june-2016-pr.jpg)" alt="PV system design introduction/光伏系统设计简介" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/PV/">PV</a></p>
+                            <p class="item-title"><a href="/2017/05/28/PV-system-design-introduction/" class="title">PV system design introduction/光伏系统设计简介</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T13:30:50.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/03/19/the-time-machine/" class="thumbnail">
     
     
@@ -418,25 +590,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/03/03/Flask-Web-Development-Developing-Web-Applications-with-Python/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://images-cn.ssl-images-amazon.com/images/I/51GsbpQfn2L.jpg)" alt="Flask Web Development:Developing Web Applications with Python/Flask Web开发:基于Python的Web应用开发实战" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/reading/">reading</a></p>
-                            <p class="item-title"><a href="/2017/03/03/Flask-Web-Development-Developing-Web-Applications-with-Python/" class="title">Flask Web Development:Developing Web Applications with Python/Flask Web开发:基于Python的Web应用开发实战</a></p>
-                            <p class="item-date"><time datetime="2017-03-03T15:10:33.000Z" itemprop="datePublished">2017-03-03</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -446,7 +599,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">10</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PV/">PV</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/misc/">misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading/">reading</a><span class="category-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -455,7 +608,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">7</span></li></ul>
         </div>
     </div>
 
@@ -464,7 +617,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aeronautics/">aeronautics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/godaddy/">godaddy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-map-api/">google map api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Astro/">Astro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Engineering/">Engineering</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NGINX/">NGINX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PV/">PV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SuperConductor/">SuperConductor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL/">WSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aeronautics/">aeronautics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amap-api/">amap api</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drive/">drive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/godaddy/">godaddy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-map-api/">google map api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gunicorn/">gunicorn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -473,7 +626,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 10px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 16.67px;">WSL</a> <a href="/tags/aeronautics/" style="font-size: 10px;">aeronautics</a> <a href="/tags/amap-api/" style="font-size: 13.33px;">amap api</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 16.67px;">flask</a> <a href="/tags/godaddy/" style="font-size: 10px;">godaddy</a> <a href="/tags/google-map-api/" style="font-size: 10px;">google map api</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
+            <a href="/tags/Astro/" style="font-size: 10px;">Astro</a> <a href="/tags/Engineering/" style="font-size: 10px;">Engineering</a> <a href="/tags/NGINX/" style="font-size: 10px;">NGINX</a> <a href="/tags/PV/" style="font-size: 13.33px;">PV</a> <a href="/tags/SuperConductor/" style="font-size: 10px;">SuperConductor</a> <a href="/tags/WSL/" style="font-size: 16.67px;">WSL</a> <a href="/tags/aeronautics/" style="font-size: 10px;">aeronautics</a> <a href="/tags/amap-api/" style="font-size: 13.33px;">amap api</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/drive/" style="font-size: 10px;">drive</a> <a href="/tags/flask/" style="font-size: 16.67px;">flask</a> <a href="/tags/godaddy/" style="font-size: 10px;">godaddy</a> <a href="/tags/google-map-api/" style="font-size: 10px;">google map api</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
         </div>
     </div>
 
